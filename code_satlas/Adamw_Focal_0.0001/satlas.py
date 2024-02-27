@@ -22,60 +22,7 @@ import time
 import copy
 from rasterio.errors import NotGeoreferencedWarning
 import warnings
-from model_foundation_local_rev2 import Foundation as Foundation_local
-from blocks import CNNBlock
-from torch import nn
-
-
-class FloodPredictorHSL(nn.Module):
-    def __init__(
-        self,
-        *,
-        input_dim=5,
-        output_dim=None,
-        path_weights="",
-    ):
-        super().__init__()
-        
-        self.input_dim = input_dim
-        self.output_dim = output_dim
-        self.path_weights = path_weights
-
-        self.foundation = Foundation_local(
-            input_dim=10, # B02, B03, B04, B05, B06, B07, B08, B8A, B11, B12
-            depths=[3, 3, 4, 4, 5],  # 128, 64, 32, 16, 8
-            dims=[32, 32, 32, 64, 64],
-            img_size=128,
-            latent_dim=1024,
-            dropout=None,
-            activation=nn.LeakyReLU(),
-        )
-
-        if self.path_weights != "":
-            weights = torch.load(self.path_weights)
-            self.foundation.load_state_dict(weights, strict=False)
-
-        self.encoder = self.foundation.encoder # expects dim 32 input
-        self.decoder = self.foundation.decoder
-
-        self.stem = CNNBlock(self.input_dim, 32, activation=nn.LeakyReLU(), residual=False, chw=[self.input_dim, 128, 128])
-        self.head = CNNBlock(32, self.output_dim, activation=nn.LeakyReLU(), activation_out=nn.Sigmoid(), chw=[self.output_dim, 128, 128])
-
-    def forward(self, x):
-        x = self.stem(x)
-        embeddings, embeddings_cnn, skips, predictions = self.encoder(x)
-        decoded = self.decoder(embeddings, skips)
-        reconstruction = self.head(decoded)
-
-        return reconstruction
-    
-# model = FloodPredictorHSL(input_dim=7, output_dim=2, path_weights="/home/zhangz65/NASA_model/phi_lab+model/phileo-precursor-model/phileo-precursor_v01_e027.pt")
-
-
-
-# print(model)
-
-
+import torch.nn as nn
 
 weights_manager = satlaspretrain_models.Weights()
 
@@ -110,12 +57,27 @@ class Sentinel2Dataset(Dataset):
         # Read label PNG image
         label = np.array(Image.open(label_name))
 
+        # counts = np.bincount(label.flatten())
+
+        # # Assuming class labels are 0 and 1
+        # num_class_0 = counts[0]
+        # num_class_1 = counts[1]
+
+        # print(f"Number of Class 0 pixels: {num_class_0}")
+        # print(f"Number of Class 1 pixels: {num_class_1}")
+
+        # plt.imshow(label)
+
+        # print(f"Image shape: {img.shape}")
+
         # Convert label to binary format if necessary
-        label = (label > 0).astype(np.float32)
+        # label = (label > 0).astype(np.float32)
 
         # Convert arrays to PyTorch tensors
         img = torch.from_numpy(img).float()
         label = torch.from_numpy(label).float()  # Add channel dimension to label
+
+        
 
         # mean = torch.from_numpy(self.mean).float().view(7, 1, 1)  # Reshape mean for broadcasting
         # std = torch.from_numpy(self.std).float().view(7, 1, 1)  # Reshape std for broadcasting
@@ -129,11 +91,14 @@ class Sentinel2Dataset(Dataset):
             label = augmented['mask']
 
         # Upsample image and label to 512x512
-        # img = F.interpolate(img.unsqueeze(0), size=(512, 512), mode='nearest').squeeze(0)
+        img = F.interpolate(img.unsqueeze(0), size=(512, 512), mode='nearest').squeeze(0)
         # label = F.interpolate(label.unsqueeze(0), size=(512, 512), mode='nearest').squeeze(0).squeeze(0)  # Remove added channel dimension for label
 
         # Convert label back to long tensor (for categorical data, if necessary)
-        label = label.long()  
+        num_classes = 2
+        label = label.long()
+        label = F.one_hot(label, num_classes)  # Convert to one-hot encoding
+        label = label.permute(2, 0, 1).float() # Reshape to (C, H, W) format
 
         return img, label
     
@@ -170,7 +135,7 @@ def compute_stats(dataset):
     max_val = -np.inf * np.ones(7)
     nb_samples = 0
     
-    for img,_ in dataset:
+    for img in dataset:
         nb_samples += 1
         for i in range(img.shape[0]):  # Assuming img.shape[0] is the number of channels
             channel_data = img[i].ravel()
@@ -240,11 +205,12 @@ def train_model(model, dataloaders, criterion, optimizer, num_epochs=10):
                 # track history if only in train
                 with torch.set_grad_enabled(phase == 'train'):
 
-                    outputs = model(inputs)
+                    outputs,_ = model(inputs)
                     loss = criterion(outputs, labels)
 
-                    preds,_ = torch.max(outputs, 1)
-                    corrects = torch.sum(preds == labels)
+                    _, preds = torch.max(outputs, 1)
+                    labels_class_indices = torch.argmax(labels, axis=1)
+                    corrects = torch.sum(preds == labels_class_indices)
 
                     # backward + optimize only if in training phase
                     if phase == 'train':
@@ -254,18 +220,19 @@ def train_model(model, dataloaders, criterion, optimizer, num_epochs=10):
                 # statistics
                 running_loss += loss.item() * inputs.size(0)
                 running_corrects += corrects
+            
 
             epoch_loss = running_loss / len(dataloaders[phase].dataset)
-            epoch_acc = running_corrects.double() / (len(dataloaders[phase].dataset) * inputs.size(2) * inputs.size(3))
+            epoch_acc = running_corrects.double() / (len(dataloaders[phase].dataset) * 128 * 128)
 
-            print('{} Loss: {:.4f} acc: {:.4f}'.format(phase, epoch_loss, epoch_acc))
+            print('{} Loss: {:.4f} Acc: {:.4f}'.format(phase, epoch_loss, epoch_acc))
 
             # deep copy the model
             if phase == 'val' and epoch_loss < best_loss:
                 best_loss = epoch_loss
                 best_model_wts = copy.deepcopy(model.state_dict())
             if phase == 'val':
-                val_acc_history.append(epoch_loss)
+                val_acc_history.append(epoch_acc)
 
         print()
 
@@ -288,23 +255,107 @@ def train_model(model, dataloaders, criterion, optimizer, num_epochs=10):
     
     return model, val_acc_history
 
+def calculate_class_weights(trainloader, num_classes):
+    # Initialize counters for all classes
+    class_counts = torch.zeros(num_classes)
+
+    # Iterate over the DataLoader
+    for _, mask, in trainloader:  # Assuming the DataLoader returns (input, mask, other_data)
+        for class_id in range(num_classes):
+            class_counts[class_id] += (mask == class_id).sum()
+
+
+    class_counts[class_counts == 0] = 1
+
+    inverse_freq = 1.0 / np.array(class_counts)
+    
+    # Normalize weights to sum to the number of classes
+    weights = inverse_freq / np.sum(inverse_freq) * len(class_counts)
+    
+    return weights
+
+
+    # Calculate weights inversely proportional to class counts
+    class_weights = class_counts.max() / class_counts
+
+
+    return class_weights
+
+class DiceLoss(nn.Module):
+    def __init__(self):
+        super(DiceLoss, self).__init__()
+        self.smooth = 1
+
+    def forward(self, input, target):
+        axes = tuple(range(1, input.dim()))
+        intersect = (input * target).sum(dim=axes)
+        union = torch.pow(input, 2).sum(dim=axes) + torch.pow(target, 2).sum(dim=axes)
+        loss = 1 - (2 * intersect + self.smooth) / (union + self.smooth)
+        return loss.mean()
+
+
+class FocalLoss(nn.Module):
+    def __init__(self, gamma=2):
+        super(FocalLoss, self).__init__()
+        self.gamma = gamma
+        self.eps = 1e-3
+
+    def forward(self, input, target):
+        input = input.clamp(self.eps, 1 - self.eps)
+        loss = - (target * torch.pow((1 - input), self.gamma) * torch.log(input) +
+                  (1 - target) * torch.pow(input, self.gamma) * torch.log(1 - input))
+        return loss.mean()
+
+
+class Dice_and_FocalLoss(nn.Module):
+    def __init__(self, gamma=2):
+        super(Dice_and_FocalLoss, self).__init__()
+        self.dice_loss = DiceLoss()
+        self.focal_loss = FocalLoss(gamma)
+
+    def forward(self, input, target):
+        loss = self.dice_loss(input, target) + self.focal_loss(input, target)
+        return loss
+
+
+def set_seed(seed):
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+
 
 
 if __name__ == "__main__":
     warnings.filterwarnings('ignore', category=NotGeoreferencedWarning)
+
+    set_seed(42)
+
+    # Ensure that all operations are deterministic on GPU (if used) for reproducibility
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
+
+
     # image_dir = '/home/zhangz65/NASA_model/satlas/Track2/train/images'
     # label_dir = '/home/zhangz65/NASA_model/satlas/Track2/train/labels'
     image_dir = '/mmfs1/scratch/hpc/00/zhangz65/satlas/data/Track2/train/images'
     label_dir = '/mmfs1/scratch/hpc/00/zhangz65/satlas/data/Track2/train/labels'
     # Experiment Arguments
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     batch_size = 16
     num_workers = 4
     max_epochs = 200
     fast_dev_run = False
     val_step = 1 
-    weights = torch.tensor([0.51330465, 1.4866954]).to(device)  # Assuming you have 2 classes
-    criterion = torch.nn.CrossEntropyLoss(weight=weights)
+    # weights = torch.tensor([1.0000, 3.0205]).to(device)  # Assuming you have 2 classes
+    weights = torch.tensor([0.51330465, 1.4866954]).to(device)  # Assuming you have 2 classes 
+    criterion = FocalLoss()
+    # criterion = nn.CrossEntropyLoss(weight=weights)  
     # mean = [396.46749898, 494.62101716, 822.31995507,973.67493873, 2090.1119281, 1964.05106209, 1351.27389706]
     # std = [145.5476537, 182.14385468,236.99994894, 315.72007761,692.93872549, 746.6220384, 572.43704044]
     # Assuming your image directory is correctly set
@@ -318,6 +369,13 @@ if __name__ == "__main__":
     train_loader, val_loader = get_dataloaders(image_dir, label_dir, batch_size=batch_size, train_size=0.8, transform=None)
     dataloaders_dict = {'train': train_loader, 'val': val_loader}
 
+        # Example usage
+    # num_classes = 2
+    # ignored_classes = None  # Classes you don't want to train on
+    # weights = calculate_class_weights(dataloaders_dict['train'], num_classes)
+    # print(weights)
+
+
     
 
                           
@@ -328,32 +386,30 @@ if __name__ == "__main__":
     print("DataLoaders created successfully!")
 
 
-    model = FloodPredictorHSL(input_dim=7, output_dim=2, path_weights="/home/zhangz65/NASA_model/phi_lab+model/phileo-precursor-model/phileo-precursor_v01_e027.pt")
+    model = weights_manager.get_pretrained_model("Landsat_SwinB_SI", fpn=True, head=satlaspretrain_models.Head.SEGMENT, num_categories=2)
+        
+
+        # Replace first layer's input channels with the task's number input channels.
+    first_layer =model.backbone.backbone.features[0][0]
+    model.backbone.backbone.features[0][0] = torch.nn.Conv2d(7,
+                        first_layer.out_channels,
+                        kernel_size=first_layer.kernel_size,
+                        stride=first_layer.stride,
+                        padding=first_layer.padding,
+                        bias=(first_layer.bias is not None))
 
     print(model)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
 
     # Optimizer and learning rate scheduler
-    optimizer = torch.optim.AdamW(model.parameters(), lr=0.01)
-    # optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=0.0001)
+    # optimizer = torch.optim.SGD(model.parameters(), lr=0.0001, momentum=0.9)
 
+    
 
     model_ft, hist = train_model(model, dataloaders_dict, criterion, optimizer, num_epochs=max_epochs)
 
 
-
-
-
-
-
-# tensor = torch.zeros((1, 6, 128, 128), dtype=torch.float32)
-
-# model = SatlasSegmentationTask()
-
-
-# model.eval()
-# output = model(tensor)
-# print(output)
 
 

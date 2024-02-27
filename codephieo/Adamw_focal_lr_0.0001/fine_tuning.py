@@ -132,8 +132,10 @@ class Sentinel2Dataset(Dataset):
         # img = F.interpolate(img.unsqueeze(0), size=(512, 512), mode='nearest').squeeze(0)
         # label = F.interpolate(label.unsqueeze(0), size=(512, 512), mode='nearest').squeeze(0).squeeze(0)  # Remove added channel dimension for label
 
-        # Convert label back to long tensor (for categorical data, if necessary)
-        label = label.long()  
+        num_classes = 2
+        label = label.long()
+        label = F.one_hot(label, num_classes)  # Convert to one-hot encoding
+        label = label.permute(2, 0, 1).float() # Reshape to (C, H, W) format
 
         return img, label
     
@@ -205,6 +207,42 @@ def visualize_samples(dataloader, num_samples=3):
         break # Only show the first batch
     plt.show()
 
+class DiceLoss(nn.Module):
+    def __init__(self):
+        super(DiceLoss, self).__init__()
+        self.smooth = 1
+
+    def forward(self, input, target):
+        axes = tuple(range(1, input.dim()))
+        intersect = (input * target).sum(dim=axes)
+        union = torch.pow(input, 2).sum(dim=axes) + torch.pow(target, 2).sum(dim=axes)
+        loss = 1 - (2 * intersect + self.smooth) / (union + self.smooth)
+        return loss.mean()
+
+
+class FocalLoss(nn.Module):
+    def __init__(self, gamma=2):
+        super(FocalLoss, self).__init__()
+        self.gamma = gamma
+        self.eps = 1e-3
+
+    def forward(self, input, target):
+        input = input.clamp(self.eps, 1 - self.eps)
+        loss = - (target * torch.pow((1 - input), self.gamma) * torch.log(input) +
+                  (1 - target) * torch.pow(input, self.gamma) * torch.log(1 - input))
+        return loss.mean()
+
+
+class Dice_and_FocalLoss(nn.Module):
+    def __init__(self, gamma=2):
+        super(Dice_and_FocalLoss, self).__init__()
+        self.dice_loss = DiceLoss()
+        self.focal_loss = FocalLoss(gamma)
+
+    def forward(self, input, target):
+        loss = self.dice_loss(input, target) + self.focal_loss(input, target)
+        return loss
+
 
 def train_model(model, dataloaders, criterion, optimizer, num_epochs=10):
     since = time.time()
@@ -243,8 +281,9 @@ def train_model(model, dataloaders, criterion, optimizer, num_epochs=10):
                     outputs = model(inputs)
                     loss = criterion(outputs, labels)
 
-                    preds,_ = torch.max(outputs, 1)
-                    corrects = torch.sum(preds == labels)
+                    _, preds = torch.max(outputs, 1)
+                    labels_class_indices = torch.argmax(labels, axis=1)
+                    corrects = torch.sum(preds == labels_class_indices)
 
                     # backward + optimize only if in training phase
                     if phase == 'train':
@@ -254,6 +293,7 @@ def train_model(model, dataloaders, criterion, optimizer, num_epochs=10):
                 # statistics
                 running_loss += loss.item() * inputs.size(0)
                 running_corrects += corrects
+
 
             epoch_loss = running_loss / len(dataloaders[phase].dataset)
             epoch_acc = running_corrects.double() / (len(dataloaders[phase].dataset) * inputs.size(2) * inputs.size(3))
@@ -289,9 +329,27 @@ def train_model(model, dataloaders, criterion, optimizer, num_epochs=10):
     return model, val_acc_history
 
 
+def set_seed(seed):
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+
+
 
 if __name__ == "__main__":
     warnings.filterwarnings('ignore', category=NotGeoreferencedWarning)
+
+    set_seed(42)
+
+    # Ensure that all operations are deterministic on GPU (if used) for reproducibility
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
+
+    # image_dir = '/home/zhangz65/NASA_model/satlas/Track2/train/images'
+    # label_dir = '/home/zhangz65/NASA_model/satlas/Track2/train/labels'
     image_dir = '/mmfs1/scratch/hpc/00/zhangz65/satlas/data/Track2/train/images'
     label_dir = '/mmfs1/scratch/hpc/00/zhangz65/satlas/data/Track2/train/labels'
     # Experiment Arguments
@@ -302,7 +360,8 @@ if __name__ == "__main__":
     fast_dev_run = False
     val_step = 1 
     weights = torch.tensor([0.51330465, 1.4866954]).to(device)  # Assuming you have 2 classes
-    criterion = torch.nn.CrossEntropyLoss(weight=weights)
+    # criterion = torch.nn.CrossEntropyLoss(weight=weights)
+    criterion = FocalLoss()
     # mean = [396.46749898, 494.62101716, 822.31995507,973.67493873, 2090.1119281, 1964.05106209, 1351.27389706]
     # std = [145.5476537, 182.14385468,236.99994894, 315.72007761,692.93872549, 746.6220384, 572.43704044]
     # Assuming your image directory is correctly set
@@ -326,15 +385,15 @@ if __name__ == "__main__":
     print("DataLoaders created successfully!")
 
 
-    model = FloodPredictorHSL(input_dim=7, output_dim=2, path_weights="/mmfs1/scratch/hpc/00/zhangz65/satlas/codephieo/sgd_lr_0.01/phileo-precursor_v01_e027.pt")
-
+    # model = FloodPredictorHSL(input_dim=7, output_dim=2, path_weights="/home/zhangz65/NASA_model/phi_lab+model/phileo-precursor-model/phileo-precursor_v01_e027.pt")
+    model = FloodPredictorHSL(input_dim=7, output_dim=2, path_weights="phileo-precursor_v01_e027.pt")
     print(model)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
 
     # Optimizer and learning rate scheduler
-    # optimizer = torch.optim.AdamW(model.parameters(), lr=0.1)
-    optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=0.0001)
+    # optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
 
 
     model_ft, hist = train_model(model, dataloaders_dict, criterion, optimizer, num_epochs=max_epochs)
@@ -342,16 +401,5 @@ if __name__ == "__main__":
 
 
 
-
-
-
-# tensor = torch.zeros((1, 6, 128, 128), dtype=torch.float32)
-
-# model = SatlasSegmentationTask()
-
-
-# model.eval()
-# output = model(tensor)
-# print(output)
 
 

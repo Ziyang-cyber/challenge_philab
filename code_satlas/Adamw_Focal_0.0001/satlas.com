@@ -10,4 +10,4 @@ module add cuda/12.0
 module add anaconda3/2023.09
 
 source activate /storage/hpc/00/zhangz65/acaconda3/envs/satlas
-python fine_tuning.py
+python satlas.py
