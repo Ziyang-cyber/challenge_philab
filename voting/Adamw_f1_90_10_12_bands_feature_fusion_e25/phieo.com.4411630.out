@@ -1,0 +1,6262 @@
+2.2.0
+test
+DataLoaders created successfully!
+FloodPredictorHSL(
+  (foundation_spectral): FloodPredictorSpectral(
+    (foundation): Foundation(
+      (activation): GELU(approximate='none')
+      (stem): CNNBlock(
+        (activation): GELU(approximate='none')
+        (activation_out): GELU(approximate='none')
+        (squeeze): SE_Block(
+          (squeeze): AdaptiveAvgPool2d(output_size=1)
+          (excitation): Sequential(
+            (0): Linear(in_features=32, out_features=2, bias=False)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=2, out_features=32, bias=False)
+            (3): Sigmoid()
+          )
+        )
+        (matcher): Conv2d(10, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+        (conv1): Conv2d(10, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+        (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+        (scaler): ScaleSkip2D()
+      )
+      (encoder): FoundationEncoder(
+        (activation): GELU(approximate='none')
+        (downsample): ModuleList(
+          (0): Sequential(
+            (0): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+            (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          )
+          (1): Sequential(
+            (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
+            (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          )
+          (2): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+            (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          )
+          (3): Sequential(
+            (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+            (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          )
+        )
+        (block_scalers): ModuleList(
+          (0-4): 5 x ScaleSkip2D()
+        )
+        (blocks_down): ModuleList(
+          (0): ModuleList(
+            (0-2): 3 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=32, out_features=2, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=2, out_features=32, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (1): ModuleList(
+            (0-2): 3 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=32, out_features=2, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=2, out_features=32, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (2): ModuleList(
+            (0-3): 4 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=64, out_features=4, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=4, out_features=64, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (3): ModuleList(
+            (0-3): 4 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=64, out_features=4, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=4, out_features=64, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (4): ModuleList(
+            (0-4): 5 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=128, out_features=8, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=8, out_features=128, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+        )
+        (prelinear_norm): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+        (linear_encode): Sequential(
+          (0): GELU(approximate='none')
+          (1): Linear(in_features=8192, out_features=1024, bias=True)
+          (2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        )
+        (head_clouds): Sequential(
+          (0): Linear(in_features=1024, out_features=4, bias=True)
+        )
+        (head_landcover): Sequential(
+          (0): Linear(in_features=1024, out_features=11, bias=True)
+        )
+        (head_buildings): Sequential(
+          (0): Linear(in_features=1024, out_features=1, bias=True)
+          (1): Sigmoid()
+        )
+        (head_water): Sequential(
+          (0): Linear(in_features=1024, out_features=1, bias=True)
+          (1): Sigmoid()
+        )
+        (head_coords): Sequential(
+          (0): Linear(in_features=1024, out_features=4, bias=True)
+          (1): Sigmoid()
+        )
+      )
+      (decoder): FoundationDecoder(
+        (activation): GELU(approximate='none')
+        (linear_decode): Linear(in_features=1024, out_features=8192, bias=True)
+        (latent_norm): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+        (prehead_norm): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+        (skip_scalers): ModuleList(
+          (0-4): 5 x ScaleSkip2D()
+        )
+        (block_scalers): ModuleList(
+          (0-4): 5 x ScaleSkip2D()
+        )
+        (blocks_up): ModuleList(
+          (0): ModuleList(
+            (0-4): 5 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=128, out_features=8, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=8, out_features=128, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (1): ModuleList(
+            (0-3): 4 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=64, out_features=4, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=4, out_features=64, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (2): ModuleList(
+            (0-3): 4 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=64, out_features=4, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=4, out_features=64, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (3): ModuleList(
+            (0-2): 3 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=32, out_features=2, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=2, out_features=32, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (4): ModuleList(
+            (0-2): 3 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=32, out_features=2, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=2, out_features=32, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+        )
+        (upsamplers): ModuleList(
+          (0): Sequential(
+            (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+            (1): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+            (3): GELU(approximate='none')
+          )
+          (1): Sequential(
+            (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+            (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+            (3): GELU(approximate='none')
+          )
+          (2): Sequential(
+            (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+            (1): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+            (3): GELU(approximate='none')
+          )
+          (3): Sequential(
+            (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+            (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+            (3): GELU(approximate='none')
+          )
+        )
+      )
+      (head): CNNBlock(
+        (activation): GELU(approximate='none')
+        (activation_out): Sigmoid()
+        (squeeze): SE_Block(
+          (squeeze): AdaptiveAvgPool2d(output_size=1)
+          (excitation): Sequential(
+            (0): Linear(in_features=10, out_features=1, bias=False)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=1, out_features=10, bias=False)
+            (3): Sigmoid()
+          )
+        )
+        (matcher): Conv2d(32, 10, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (norm1): LayerNorm((10, 128, 128), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((10, 128, 128), eps=1e-05, elementwise_affine=True)
+        (conv1): Conv2d(32, 10, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (conv2): Conv2d(10, 10, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+        (conv3): Conv2d(10, 10, kernel_size=(1, 1), stride=(1, 1))
+        (scaler): ScaleSkip2D()
+      )
+    )
+    (encoder): FoundationEncoder(
+      (activation): GELU(approximate='none')
+      (downsample): ModuleList(
+        (0): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+          (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        )
+        (1): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        )
+        (2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        )
+        (3): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+          (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        )
+      )
+      (block_scalers): ModuleList(
+        (0-4): 5 x ScaleSkip2D()
+      )
+      (blocks_down): ModuleList(
+        (0): ModuleList(
+          (0-2): 3 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=32, out_features=2, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=2, out_features=32, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (1): ModuleList(
+          (0-2): 3 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=32, out_features=2, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=2, out_features=32, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (2): ModuleList(
+          (0-3): 4 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=64, out_features=4, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=4, out_features=64, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (3): ModuleList(
+          (0-3): 4 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=64, out_features=4, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=4, out_features=64, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (4): ModuleList(
+          (0-4): 5 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=128, out_features=8, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=8, out_features=128, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+      )
+      (prelinear_norm): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+      (linear_encode): Sequential(
+        (0): GELU(approximate='none')
+        (1): Linear(in_features=8192, out_features=1024, bias=True)
+        (2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      )
+      (head_clouds): Sequential(
+        (0): Linear(in_features=1024, out_features=4, bias=True)
+      )
+      (head_landcover): Sequential(
+        (0): Linear(in_features=1024, out_features=11, bias=True)
+      )
+      (head_buildings): Sequential(
+        (0): Linear(in_features=1024, out_features=1, bias=True)
+        (1): Sigmoid()
+      )
+      (head_water): Sequential(
+        (0): Linear(in_features=1024, out_features=1, bias=True)
+        (1): Sigmoid()
+      )
+      (head_coords): Sequential(
+        (0): Linear(in_features=1024, out_features=4, bias=True)
+        (1): Sigmoid()
+      )
+    )
+    (decoder): FoundationDecoder(
+      (activation): GELU(approximate='none')
+      (linear_decode): Linear(in_features=1024, out_features=8192, bias=True)
+      (latent_norm): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+      (prehead_norm): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+      (skip_scalers): ModuleList(
+        (0-4): 5 x ScaleSkip2D()
+      )
+      (block_scalers): ModuleList(
+        (0-4): 5 x ScaleSkip2D()
+      )
+      (blocks_up): ModuleList(
+        (0): ModuleList(
+          (0-4): 5 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=128, out_features=8, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=8, out_features=128, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (1): ModuleList(
+          (0-3): 4 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=64, out_features=4, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=4, out_features=64, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (2): ModuleList(
+          (0-3): 4 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=64, out_features=4, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=4, out_features=64, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (3): ModuleList(
+          (0-2): 3 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=32, out_features=2, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=2, out_features=32, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (4): ModuleList(
+          (0-2): 3 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=32, out_features=2, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=2, out_features=32, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+      )
+      (upsamplers): ModuleList(
+        (0): Sequential(
+          (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+          (1): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+          (2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+          (3): GELU(approximate='none')
+        )
+        (1): Sequential(
+          (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+          (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+          (2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+          (3): GELU(approximate='none')
+        )
+        (2): Sequential(
+          (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+          (1): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+          (2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+          (3): GELU(approximate='none')
+        )
+        (3): Sequential(
+          (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+          (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+          (2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+          (3): GELU(approximate='none')
+        )
+      )
+    )
+    (stem): CNNBlock(
+      (activation): GELU(approximate='none')
+      (activation_out): GELU(approximate='none')
+      (squeeze): SE_Block(
+        (squeeze): AdaptiveAvgPool2d(output_size=1)
+        (excitation): Sequential(
+          (0): Linear(in_features=32, out_features=2, bias=False)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2, out_features=32, bias=False)
+          (3): Sigmoid()
+        )
+      )
+      (matcher): Conv2d(7, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+      (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+      (conv1): Conv2d(7, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+      (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+  (foundation_static): FloodPredictorStatic(
+    (foundation): Foundation(
+      (activation): GELU(approximate='none')
+      (stem): CNNBlock(
+        (activation): GELU(approximate='none')
+        (activation_out): GELU(approximate='none')
+        (squeeze): SE_Block(
+          (squeeze): AdaptiveAvgPool2d(output_size=1)
+          (excitation): Sequential(
+            (0): Linear(in_features=32, out_features=2, bias=False)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=2, out_features=32, bias=False)
+            (3): Sigmoid()
+          )
+        )
+        (matcher): Conv2d(10, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+        (conv1): Conv2d(10, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+        (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+        (scaler): ScaleSkip2D()
+      )
+      (encoder): FoundationEncoder(
+        (activation): GELU(approximate='none')
+        (downsample): ModuleList(
+          (0): Sequential(
+            (0): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+            (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          )
+          (1): Sequential(
+            (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
+            (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          )
+          (2): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+            (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          )
+          (3): Sequential(
+            (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+            (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          )
+        )
+        (block_scalers): ModuleList(
+          (0-4): 5 x ScaleSkip2D()
+        )
+        (blocks_down): ModuleList(
+          (0): ModuleList(
+            (0-2): 3 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=32, out_features=2, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=2, out_features=32, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (1): ModuleList(
+            (0-2): 3 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=32, out_features=2, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=2, out_features=32, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (2): ModuleList(
+            (0-3): 4 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=64, out_features=4, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=4, out_features=64, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (3): ModuleList(
+            (0-3): 4 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=64, out_features=4, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=4, out_features=64, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (4): ModuleList(
+            (0-4): 5 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=128, out_features=8, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=8, out_features=128, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+        )
+        (prelinear_norm): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+        (linear_encode): Sequential(
+          (0): GELU(approximate='none')
+          (1): Linear(in_features=8192, out_features=1024, bias=True)
+          (2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        )
+        (head_clouds): Sequential(
+          (0): Linear(in_features=1024, out_features=4, bias=True)
+        )
+        (head_landcover): Sequential(
+          (0): Linear(in_features=1024, out_features=11, bias=True)
+        )
+        (head_buildings): Sequential(
+          (0): Linear(in_features=1024, out_features=1, bias=True)
+          (1): Sigmoid()
+        )
+        (head_water): Sequential(
+          (0): Linear(in_features=1024, out_features=1, bias=True)
+          (1): Sigmoid()
+        )
+        (head_coords): Sequential(
+          (0): Linear(in_features=1024, out_features=4, bias=True)
+          (1): Sigmoid()
+        )
+      )
+      (decoder): FoundationDecoder(
+        (activation): GELU(approximate='none')
+        (linear_decode): Linear(in_features=1024, out_features=8192, bias=True)
+        (latent_norm): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+        (prehead_norm): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+        (skip_scalers): ModuleList(
+          (0-4): 5 x ScaleSkip2D()
+        )
+        (block_scalers): ModuleList(
+          (0-4): 5 x ScaleSkip2D()
+        )
+        (blocks_up): ModuleList(
+          (0): ModuleList(
+            (0-4): 5 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=128, out_features=8, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=8, out_features=128, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (1): ModuleList(
+            (0-3): 4 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=64, out_features=4, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=4, out_features=64, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (2): ModuleList(
+            (0-3): 4 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=64, out_features=4, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=4, out_features=64, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (3): ModuleList(
+            (0-2): 3 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=32, out_features=2, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=2, out_features=32, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+          (4): ModuleList(
+            (0-2): 3 x CNNBlock(
+              (activation): GELU(approximate='none')
+              (activation_out): GELU(approximate='none')
+              (squeeze): SE_Block(
+                (squeeze): AdaptiveAvgPool2d(output_size=1)
+                (excitation): Sequential(
+                  (0): Linear(in_features=32, out_features=2, bias=False)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=2, out_features=32, bias=False)
+                  (3): Sigmoid()
+                )
+              )
+              (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+              (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+              (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+              (scaler): ScaleSkip2D()
+            )
+          )
+        )
+        (upsamplers): ModuleList(
+          (0): Sequential(
+            (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+            (1): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+            (3): GELU(approximate='none')
+          )
+          (1): Sequential(
+            (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+            (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+            (3): GELU(approximate='none')
+          )
+          (2): Sequential(
+            (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+            (1): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+            (3): GELU(approximate='none')
+          )
+          (3): Sequential(
+            (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+            (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+            (3): GELU(approximate='none')
+          )
+        )
+      )
+      (head): CNNBlock(
+        (activation): GELU(approximate='none')
+        (activation_out): Sigmoid()
+        (squeeze): SE_Block(
+          (squeeze): AdaptiveAvgPool2d(output_size=1)
+          (excitation): Sequential(
+            (0): Linear(in_features=10, out_features=1, bias=False)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=1, out_features=10, bias=False)
+            (3): Sigmoid()
+          )
+        )
+        (matcher): Conv2d(32, 10, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (norm1): LayerNorm((10, 128, 128), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((10, 128, 128), eps=1e-05, elementwise_affine=True)
+        (conv1): Conv2d(32, 10, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (conv2): Conv2d(10, 10, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+        (conv3): Conv2d(10, 10, kernel_size=(1, 1), stride=(1, 1))
+        (scaler): ScaleSkip2D()
+      )
+    )
+    (encoder): FoundationEncoder(
+      (activation): GELU(approximate='none')
+      (downsample): ModuleList(
+        (0): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+          (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        )
+        (1): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        )
+        (2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        )
+        (3): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+          (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        )
+      )
+      (block_scalers): ModuleList(
+        (0-4): 5 x ScaleSkip2D()
+      )
+      (blocks_down): ModuleList(
+        (0): ModuleList(
+          (0-2): 3 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=32, out_features=2, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=2, out_features=32, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (1): ModuleList(
+          (0-2): 3 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=32, out_features=2, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=2, out_features=32, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (2): ModuleList(
+          (0-3): 4 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=64, out_features=4, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=4, out_features=64, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (3): ModuleList(
+          (0-3): 4 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=64, out_features=4, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=4, out_features=64, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (4): ModuleList(
+          (0-4): 5 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=128, out_features=8, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=8, out_features=128, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+      )
+      (prelinear_norm): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+      (linear_encode): Sequential(
+        (0): GELU(approximate='none')
+        (1): Linear(in_features=8192, out_features=1024, bias=True)
+        (2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      )
+      (head_clouds): Sequential(
+        (0): Linear(in_features=1024, out_features=4, bias=True)
+      )
+      (head_landcover): Sequential(
+        (0): Linear(in_features=1024, out_features=11, bias=True)
+      )
+      (head_buildings): Sequential(
+        (0): Linear(in_features=1024, out_features=1, bias=True)
+        (1): Sigmoid()
+      )
+      (head_water): Sequential(
+        (0): Linear(in_features=1024, out_features=1, bias=True)
+        (1): Sigmoid()
+      )
+      (head_coords): Sequential(
+        (0): Linear(in_features=1024, out_features=4, bias=True)
+        (1): Sigmoid()
+      )
+    )
+    (decoder): FoundationDecoder(
+      (activation): GELU(approximate='none')
+      (linear_decode): Linear(in_features=1024, out_features=8192, bias=True)
+      (latent_norm): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+      (prehead_norm): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+      (skip_scalers): ModuleList(
+        (0-4): 5 x ScaleSkip2D()
+      )
+      (block_scalers): ModuleList(
+        (0-4): 5 x ScaleSkip2D()
+      )
+      (blocks_up): ModuleList(
+        (0): ModuleList(
+          (0-4): 5 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=128, out_features=8, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=8, out_features=128, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((128, 8, 8), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (1): ModuleList(
+          (0-3): 4 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=64, out_features=4, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=4, out_features=64, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (2): ModuleList(
+          (0-3): 4 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=64, out_features=4, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=4, out_features=64, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (3): ModuleList(
+          (0-2): 3 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=32, out_features=2, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=2, out_features=32, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+        (4): ModuleList(
+          (0-2): 3 x CNNBlock(
+            (activation): GELU(approximate='none')
+            (activation_out): GELU(approximate='none')
+            (squeeze): SE_Block(
+              (squeeze): AdaptiveAvgPool2d(output_size=1)
+              (excitation): Sequential(
+                (0): Linear(in_features=32, out_features=2, bias=False)
+                (1): GELU(approximate='none')
+                (2): Linear(in_features=2, out_features=32, bias=False)
+                (3): Sigmoid()
+              )
+            )
+            (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+            (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+            (conv1): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+            (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+            (scaler): ScaleSkip2D()
+          )
+        )
+      )
+      (upsamplers): ModuleList(
+        (0): Sequential(
+          (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+          (1): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+          (2): LayerNorm((64, 16, 16), eps=1e-05, elementwise_affine=True)
+          (3): GELU(approximate='none')
+        )
+        (1): Sequential(
+          (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+          (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+          (2): LayerNorm((64, 32, 32), eps=1e-05, elementwise_affine=True)
+          (3): GELU(approximate='none')
+        )
+        (2): Sequential(
+          (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+          (1): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+          (2): LayerNorm((32, 64, 64), eps=1e-05, elementwise_affine=True)
+          (3): GELU(approximate='none')
+        )
+        (3): Sequential(
+          (0): UpsamplingBilinear2d(scale_factor=2.0, mode='bilinear')
+          (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+          (2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+          (3): GELU(approximate='none')
+        )
+      )
+    )
+    (stem): CNNBlock(
+      (activation): GELU(approximate='none')
+      (activation_out): GELU(approximate='none')
+      (squeeze): SE_Block(
+        (squeeze): AdaptiveAvgPool2d(output_size=1)
+        (excitation): Sequential(
+          (0): Linear(in_features=32, out_features=2, bias=False)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2, out_features=32, bias=False)
+          (3): Sigmoid()
+        )
+      )
+      (matcher): Conv2d(15, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+      (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+      (conv1): Conv2d(15, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+      (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+  (head): Sequential(
+    (0): Dropout2d(p=0.2, inplace=False)
+    (1): CNNBlock(
+      (activation): GELU(approximate='none')
+      (activation_out): GELU(approximate='none')
+      (squeeze): SE_Block(
+        (squeeze): AdaptiveAvgPool2d(output_size=1)
+        (excitation): Sequential(
+          (0): Linear(in_features=32, out_features=2, bias=False)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2, out_features=32, bias=False)
+          (3): Sigmoid()
+        )
+      )
+      (matcher): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (norm1): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+      (norm2): LayerNorm((32, 128, 128), eps=1e-05, elementwise_affine=True)
+      (conv1): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+      (conv3): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (2): CNNBlock(
+      (activation): GELU(approximate='none')
+      (activation_out): Softmax(dim=1)
+      (squeeze): SE_Block(
+        (squeeze): AdaptiveAvgPool2d(output_size=1)
+        (excitation): Sequential(
+          (0): Linear(in_features=2, out_features=1, bias=False)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=1, out_features=2, bias=False)
+          (3): Sigmoid()
+        )
+      )
+      (matcher): Conv2d(32, 2, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (norm1): LayerNorm((2, 128, 128), eps=1e-05, elementwise_affine=True)
+      (norm2): LayerNorm((2, 128, 128), eps=1e-05, elementwise_affine=True)
+      (conv1): Conv2d(32, 2, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv2): Conv2d(2, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False, padding_mode=replicate)
+      (conv3): Conv2d(2, 2, kernel_size=(1, 1), stride=(1, 1))
+      (scaler): ScaleSkip2D()
+    )
+  )
+)
+Epoch 0/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.1595 Acc: 0.6749 F1: 0.6973
+
+Epoch 1/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.1092 Acc: 0.8999 F1: 0.8955
+
+Epoch 2/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0839 Acc: 0.9089 F1: 0.9050
+
+Epoch 3/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0715 Acc: 0.9115 F1: 0.9083
+
+Epoch 4/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0663 Acc: 0.9129 F1: 0.9097
+
+Epoch 5/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0640 Acc: 0.9109 F1: 0.9082
+
+Epoch 6/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0618 Acc: 0.9117 F1: 0.9089
+
+Epoch 7/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0576 Acc: 0.9145 F1: 0.9118
+
+Epoch 8/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0574 Acc: 0.9167 F1: 0.9143
+
+Epoch 9/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0548 Acc: 0.9181 F1: 0.9156
+
+Epoch 10/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0566 Acc: 0.9121 F1: 0.9095
+
+Epoch 11/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0536 Acc: 0.9190 F1: 0.9165
+
+Epoch 12/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0525 Acc: 0.9184 F1: 0.9162
+
+Epoch 13/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0516 Acc: 0.9215 F1: 0.9190
+
+Epoch 14/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0537 Acc: 0.9190 F1: 0.9162
+
+Epoch 15/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0508 Acc: 0.9215 F1: 0.9194
+
+Epoch 16/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0498 Acc: 0.9210 F1: 0.9190
+
+Epoch 17/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0500 Acc: 0.9187 F1: 0.9165
+
+Epoch 18/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0492 Acc: 0.9191 F1: 0.9169
+
+Epoch 19/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0485 Acc: 0.9210 F1: 0.9190
+
+Epoch 20/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0475 Acc: 0.9220 F1: 0.9197
+
+Epoch 21/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0475 Acc: 0.9222 F1: 0.9202
+
+Epoch 22/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0463 Acc: 0.9230 F1: 0.9209
+
+Epoch 23/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0474 Acc: 0.9230 F1: 0.9211
+
+Epoch 24/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0463 Acc: 0.9235 F1: 0.9216
+
+Epoch 25/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0471 Acc: 0.9198 F1: 0.9178
+
+Epoch 26/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0454 Acc: 0.9235 F1: 0.9217
+
+Epoch 27/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0447 Acc: 0.9253 F1: 0.9236
+
+Epoch 28/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0446 Acc: 0.9256 F1: 0.9245
+
+Epoch 29/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0453 Acc: 0.9245 F1: 0.9228
+
+Epoch 30/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0440 Acc: 0.9274 F1: 0.9256
+
+Epoch 31/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0450 Acc: 0.9249 F1: 0.9237
+
+Epoch 32/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0444 Acc: 0.9256 F1: 0.9239
+
+Epoch 33/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0433 Acc: 0.9296 F1: 0.9283
+
+Epoch 34/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0424 Acc: 0.9285 F1: 0.9268
+
+Epoch 35/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0445 Acc: 0.9273 F1: 0.9261
+
+Epoch 36/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0415 Acc: 0.9311 F1: 0.9297
+
+Epoch 37/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0431 Acc: 0.9277 F1: 0.9259
+
+Epoch 38/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0416 Acc: 0.9316 F1: 0.9305
+
+Epoch 39/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0400 Acc: 0.9340 F1: 0.9329
+
+Epoch 40/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0419 Acc: 0.9288 F1: 0.9277
+
+Epoch 41/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0434 Acc: 0.9283 F1: 0.9267
+
+Epoch 42/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0412 Acc: 0.9314 F1: 0.9302
+
+Epoch 43/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0410 Acc: 0.9325 F1: 0.9312
+
+Epoch 44/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0435 Acc: 0.9289 F1: 0.9274
+
+Epoch 45/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0413 Acc: 0.9305 F1: 0.9294
+
+Epoch 46/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0395 Acc: 0.9341 F1: 0.9331
+
+Epoch 47/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0385 Acc: 0.9357 F1: 0.9349
+
+Epoch 48/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0403 Acc: 0.9319 F1: 0.9306
+
+Epoch 49/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0387 Acc: 0.9357 F1: 0.9347
+
+Epoch 50/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0389 Acc: 0.9339 F1: 0.9331
+
+Epoch 51/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0388 Acc: 0.9352 F1: 0.9343
+
+Epoch 52/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0373 Acc: 0.9383 F1: 0.9376
+
+Epoch 53/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0380 Acc: 0.9363 F1: 0.9357
+
+Epoch 54/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0374 Acc: 0.9356 F1: 0.9347
+
+Epoch 55/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0370 Acc: 0.9377 F1: 0.9368
+
+Epoch 56/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0365 Acc: 0.9383 F1: 0.9375
+
+Epoch 57/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0361 Acc: 0.9399 F1: 0.9394
+
+Epoch 58/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0358 Acc: 0.9404 F1: 0.9399
+
+Epoch 59/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0365 Acc: 0.9390 F1: 0.9384
+
+Epoch 60/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0353 Acc: 0.9413 F1: 0.9407
+
+Epoch 61/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0367 Acc: 0.9381 F1: 0.9375
+
+Epoch 62/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0359 Acc: 0.9394 F1: 0.9388
+
+Epoch 63/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0376 Acc: 0.9372 F1: 0.9366
+
+Epoch 64/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0346 Acc: 0.9429 F1: 0.9423
+
+Epoch 65/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0354 Acc: 0.9410 F1: 0.9405
+
+Epoch 66/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0358 Acc: 0.9404 F1: 0.9398
+
+Epoch 67/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0331 Acc: 0.9448 F1: 0.9443
+
+Epoch 68/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0341 Acc: 0.9440 F1: 0.9435
+
+Epoch 69/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0335 Acc: 0.9435 F1: 0.9431
+
+Epoch 70/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0344 Acc: 0.9428 F1: 0.9423
+
+Epoch 71/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0333 Acc: 0.9446 F1: 0.9442
+
+Epoch 72/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0325 Acc: 0.9460 F1: 0.9457
+
+Epoch 73/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0326 Acc: 0.9457 F1: 0.9453
+
+Epoch 74/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0339 Acc: 0.9430 F1: 0.9426
+
+Epoch 75/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0322 Acc: 0.9470 F1: 0.9466
+
+Epoch 76/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0312 Acc: 0.9476 F1: 0.9473
+
+Epoch 77/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0321 Acc: 0.9470 F1: 0.9466
+
+Epoch 78/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0322 Acc: 0.9468 F1: 0.9465
+
+Epoch 79/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0307 Acc: 0.9498 F1: 0.9495
+
+Epoch 80/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0303 Acc: 0.9499 F1: 0.9496
+
+Epoch 81/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0303 Acc: 0.9490 F1: 0.9487
+
+Epoch 82/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0314 Acc: 0.9484 F1: 0.9481
+
+Epoch 83/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0331 Acc: 0.9444 F1: 0.9441
+
+Epoch 84/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0315 Acc: 0.9484 F1: 0.9480
+
+Epoch 85/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0322 Acc: 0.9458 F1: 0.9454
+
+Epoch 86/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0317 Acc: 0.9472 F1: 0.9468
+
+Epoch 87/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0305 Acc: 0.9497 F1: 0.9493
+
+Epoch 88/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0297 Acc: 0.9506 F1: 0.9503
+
+Epoch 89/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0301 Acc: 0.9497 F1: 0.9494
+
+Epoch 90/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0318 Acc: 0.9475 F1: 0.9471
+
+Epoch 91/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0297 Acc: 0.9514 F1: 0.9512
+
+Epoch 92/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0303 Acc: 0.9508 F1: 0.9505
+
+Epoch 93/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0296 Acc: 0.9507 F1: 0.9505
+
+Epoch 94/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0301 Acc: 0.9513 F1: 0.9511
+
+Epoch 95/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0297 Acc: 0.9511 F1: 0.9508
+
+Epoch 96/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0299 Acc: 0.9512 F1: 0.9508
+
+Epoch 97/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0290 Acc: 0.9515 F1: 0.9514
+
+Epoch 98/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0302 Acc: 0.9500 F1: 0.9497
+
+Epoch 99/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0295 Acc: 0.9517 F1: 0.9514
+
+Epoch 100/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0288 Acc: 0.9529 F1: 0.9527
+
+Epoch 101/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0274 Acc: 0.9546 F1: 0.9544
+
+Epoch 102/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0282 Acc: 0.9543 F1: 0.9541
+
+Epoch 103/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0297 Acc: 0.9505 F1: 0.9503
+
+Epoch 104/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0284 Acc: 0.9531 F1: 0.9528
+
+Epoch 105/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0271 Acc: 0.9555 F1: 0.9554
+
+Epoch 106/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0284 Acc: 0.9533 F1: 0.9530
+
+Epoch 107/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0294 Acc: 0.9519 F1: 0.9516
+
+Epoch 108/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0279 Acc: 0.9538 F1: 0.9537
+
+Epoch 109/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0270 Acc: 0.9562 F1: 0.9559
+
+Epoch 110/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0287 Acc: 0.9529 F1: 0.9527
+
+Epoch 111/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0283 Acc: 0.9545 F1: 0.9543
+
+Epoch 112/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0273 Acc: 0.9555 F1: 0.9553
+
+Epoch 113/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0261 Acc: 0.9575 F1: 0.9573
+
+Epoch 114/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0263 Acc: 0.9571 F1: 0.9569
+
+Epoch 115/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0273 Acc: 0.9554 F1: 0.9551
+
+Epoch 116/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0438 Acc: 0.9302 F1: 0.9297
+
+Epoch 117/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0334 Acc: 0.9465 F1: 0.9458
+
+Epoch 118/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0287 Acc: 0.9531 F1: 0.9528
+
+Epoch 119/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0276 Acc: 0.9551 F1: 0.9548
+
+Epoch 120/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0281 Acc: 0.9538 F1: 0.9536
+
+Epoch 121/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0290 Acc: 0.9525 F1: 0.9521
+
+Epoch 122/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0274 Acc: 0.9556 F1: 0.9554
+
+Epoch 123/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0258 Acc: 0.9574 F1: 0.9572
+
+Epoch 124/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0262 Acc: 0.9570 F1: 0.9569
+
+Epoch 125/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0262 Acc: 0.9566 F1: 0.9564
+
+Epoch 126/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0300 Acc: 0.9507 F1: 0.9503
+
+Epoch 127/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0257 Acc: 0.9576 F1: 0.9574
+
+Epoch 128/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0253 Acc: 0.9581 F1: 0.9580
+
+Epoch 129/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0251 Acc: 0.9586 F1: 0.9584
+
+Epoch 130/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0251 Acc: 0.9591 F1: 0.9589
+
+Epoch 131/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0252 Acc: 0.9587 F1: 0.9585
+
+Epoch 132/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0245 Acc: 0.9597 F1: 0.9596
+
+Epoch 133/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0246 Acc: 0.9597 F1: 0.9595
+
+Epoch 134/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0247 Acc: 0.9589 F1: 0.9587
+
+Epoch 135/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0249 Acc: 0.9586 F1: 0.9584
+
+Epoch 136/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0250 Acc: 0.9584 F1: 0.9583
+
+Epoch 137/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0250 Acc: 0.9590 F1: 0.9589
+
+Epoch 138/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0253 Acc: 0.9584 F1: 0.9582
+
+Epoch 139/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0272 Acc: 0.9554 F1: 0.9553
+
+Epoch 140/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0265 Acc: 0.9569 F1: 0.9567
+
+Epoch 141/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0313 Acc: 0.9482 F1: 0.9477
+
+Epoch 142/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0280 Acc: 0.9539 F1: 0.9537
+
+Epoch 143/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0263 Acc: 0.9565 F1: 0.9563
+
+Epoch 144/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0259 Acc: 0.9575 F1: 0.9573
+
+Epoch 145/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0258 Acc: 0.9580 F1: 0.9577
+
+Epoch 146/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0242 Acc: 0.9608 F1: 0.9606
+
+Epoch 147/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0243 Acc: 0.9600 F1: 0.9598
+
+Epoch 148/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0245 Acc: 0.9596 F1: 0.9594
+
+Epoch 149/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0238 Acc: 0.9610 F1: 0.9608
+
+Epoch 150/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0237 Acc: 0.9612 F1: 0.9610
+
+Epoch 151/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0233 Acc: 0.9619 F1: 0.9618
+
+Epoch 152/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0231 Acc: 0.9622 F1: 0.9620
+
+Epoch 153/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0242 Acc: 0.9593 F1: 0.9592
+
+Epoch 154/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0229 Acc: 0.9620 F1: 0.9618
+
+Epoch 155/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0234 Acc: 0.9613 F1: 0.9612
+
+Epoch 156/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0278 Acc: 0.9531 F1: 0.9529
+
+Epoch 157/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0248 Acc: 0.9588 F1: 0.9586
+
+Epoch 158/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0233 Acc: 0.9612 F1: 0.9611
+
+Epoch 159/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0228 Acc: 0.9627 F1: 0.9626
+
+Epoch 160/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0229 Acc: 0.9623 F1: 0.9622
+
+Epoch 161/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0232 Acc: 0.9618 F1: 0.9617
+
+Epoch 162/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0226 Acc: 0.9636 F1: 0.9635
+
+Epoch 163/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0227 Acc: 0.9624 F1: 0.9623
+
+Epoch 164/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0227 Acc: 0.9628 F1: 0.9626
+
+Epoch 165/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0242 Acc: 0.9606 F1: 0.9604
+
+Epoch 166/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0226 Acc: 0.9630 F1: 0.9629
+
+Epoch 167/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0226 Acc: 0.9625 F1: 0.9624
+
+Epoch 168/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0220 Acc: 0.9645 F1: 0.9644
+
+Epoch 169/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0225 Acc: 0.9627 F1: 0.9626
+
+Epoch 170/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0218 Acc: 0.9636 F1: 0.9636
+
+Epoch 171/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0220 Acc: 0.9642 F1: 0.9641
+
+Epoch 172/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0213 Acc: 0.9653 F1: 0.9652
+
+Epoch 173/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0228 Acc: 0.9626 F1: 0.9625
+
+Epoch 174/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0216 Acc: 0.9648 F1: 0.9647
+
+Epoch 175/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0229 Acc: 0.9624 F1: 0.9623
+
+Epoch 176/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0216 Acc: 0.9642 F1: 0.9642
+
+Epoch 177/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0221 Acc: 0.9628 F1: 0.9627
+
+Epoch 178/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0217 Acc: 0.9652 F1: 0.9651
+
+Epoch 179/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0214 Acc: 0.9649 F1: 0.9648
+
+Epoch 180/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0229 Acc: 0.9622 F1: 0.9620
+
+Epoch 181/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0211 Acc: 0.9655 F1: 0.9655
+
+Epoch 182/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0223 Acc: 0.9630 F1: 0.9630
+
+Epoch 183/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0209 Acc: 0.9664 F1: 0.9663
+
+Epoch 184/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0212 Acc: 0.9654 F1: 0.9653
+
+Epoch 185/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0212 Acc: 0.9651 F1: 0.9650
+
+Epoch 186/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0214 Acc: 0.9649 F1: 0.9648
+
+Epoch 187/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0213 Acc: 0.9646 F1: 0.9645
+
+Epoch 188/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0219 Acc: 0.9644 F1: 0.9643
+
+Epoch 189/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0210 Acc: 0.9656 F1: 0.9655
+
+Epoch 190/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0205 Acc: 0.9663 F1: 0.9662
+
+Epoch 191/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0213 Acc: 0.9650 F1: 0.9649
+
+Epoch 192/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0213 Acc: 0.9652 F1: 0.9651
+
+Epoch 193/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0209 Acc: 0.9656 F1: 0.9655
+
+Epoch 194/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0207 Acc: 0.9658 F1: 0.9657
+
+Epoch 195/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0213 Acc: 0.9655 F1: 0.9654
+
+Epoch 196/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0205 Acc: 0.9662 F1: 0.9661
+
+Epoch 197/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0202 Acc: 0.9669 F1: 0.9668
+
+Epoch 198/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0212 Acc: 0.9664 F1: 0.9663
+
+Epoch 199/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0211 Acc: 0.9658 F1: 0.9657
+
+Epoch 200/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0233 Acc: 0.9625 F1: 0.9624
+
+Epoch 201/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0215 Acc: 0.9648 F1: 0.9647
+
+Epoch 202/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0196 Acc: 0.9680 F1: 0.9679
+
+Epoch 203/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0210 Acc: 0.9651 F1: 0.9650
+
+Epoch 204/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0212 Acc: 0.9657 F1: 0.9656
+
+Epoch 205/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0230 Acc: 0.9617 F1: 0.9615
+
+Epoch 206/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0200 Acc: 0.9669 F1: 0.9669
+
+Epoch 207/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0204 Acc: 0.9664 F1: 0.9663
+
+Epoch 208/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0204 Acc: 0.9667 F1: 0.9666
+
+Epoch 209/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0198 Acc: 0.9675 F1: 0.9674
+
+Epoch 210/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0225 Acc: 0.9624 F1: 0.9622
+
+Epoch 211/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0197 Acc: 0.9675 F1: 0.9674
+
+Epoch 212/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0200 Acc: 0.9669 F1: 0.9669
+
+Epoch 213/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0187 Acc: 0.9690 F1: 0.9690
+
+Epoch 214/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0191 Acc: 0.9685 F1: 0.9684
+
+Epoch 215/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0192 Acc: 0.9685 F1: 0.9684
+
+Epoch 216/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0199 Acc: 0.9670 F1: 0.9669
+
+Epoch 217/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0206 Acc: 0.9662 F1: 0.9661
+
+Epoch 218/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0193 Acc: 0.9680 F1: 0.9679
+
+Epoch 219/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0191 Acc: 0.9687 F1: 0.9686
+
+Epoch 220/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0193 Acc: 0.9683 F1: 0.9682
+
+Epoch 221/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0190 Acc: 0.9689 F1: 0.9688
+
+Epoch 222/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0185 Acc: 0.9692 F1: 0.9691
+
+Epoch 223/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0187 Acc: 0.9698 F1: 0.9697
+
+Epoch 224/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0196 Acc: 0.9674 F1: 0.9673
+
+Epoch 225/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0188 Acc: 0.9697 F1: 0.9696
+
+Epoch 226/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0189 Acc: 0.9690 F1: 0.9690
+
+Epoch 227/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0187 Acc: 0.9692 F1: 0.9691
+
+Epoch 228/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0188 Acc: 0.9691 F1: 0.9690
+
+Epoch 229/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0194 Acc: 0.9680 F1: 0.9679
+
+Epoch 230/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0183 Acc: 0.9698 F1: 0.9698
+
+Epoch 231/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0179 Acc: 0.9706 F1: 0.9705
+
+Epoch 232/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0198 Acc: 0.9674 F1: 0.9673
+
+Epoch 233/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0196 Acc: 0.9682 F1: 0.9681
+
+Epoch 234/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0188 Acc: 0.9691 F1: 0.9690
+
+Epoch 235/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0176 Acc: 0.9712 F1: 0.9711
+
+Epoch 236/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0175 Acc: 0.9714 F1: 0.9714
+
+Epoch 237/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0180 Acc: 0.9708 F1: 0.9708
+
+Epoch 238/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0182 Acc: 0.9700 F1: 0.9699
+
+Epoch 239/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0192 Acc: 0.9692 F1: 0.9691
+
+Epoch 240/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0203 Acc: 0.9672 F1: 0.9671
+
+Epoch 241/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0189 Acc: 0.9689 F1: 0.9688
+
+Epoch 242/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0184 Acc: 0.9697 F1: 0.9696
+
+Epoch 243/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0193 Acc: 0.9681 F1: 0.9680
+
+Epoch 244/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0184 Acc: 0.9701 F1: 0.9700
+
+Epoch 245/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0174 Acc: 0.9716 F1: 0.9716
+
+Epoch 246/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0197 Acc: 0.9683 F1: 0.9683
+
+Epoch 247/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0189 Acc: 0.9692 F1: 0.9691
+
+Epoch 248/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0247 Acc: 0.9606 F1: 0.9604
+
+Epoch 249/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0212 Acc: 0.9655 F1: 0.9654
+
+Epoch 250/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0224 Acc: 0.9626 F1: 0.9625
+
+Epoch 251/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0242 Acc: 0.9594 F1: 0.9591
+
+Epoch 252/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0192 Acc: 0.9686 F1: 0.9685
+
+Epoch 253/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0180 Acc: 0.9708 F1: 0.9707
+
+Epoch 254/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0177 Acc: 0.9711 F1: 0.9711
+
+Epoch 255/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0176 Acc: 0.9713 F1: 0.9712
+
+Epoch 256/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0175 Acc: 0.9715 F1: 0.9715
+
+Epoch 257/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0178 Acc: 0.9707 F1: 0.9706
+
+Epoch 258/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0171 Acc: 0.9723 F1: 0.9722
+
+Epoch 259/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0179 Acc: 0.9710 F1: 0.9710
+
+Epoch 260/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0165 Acc: 0.9735 F1: 0.9734
+
+Epoch 261/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0169 Acc: 0.9720 F1: 0.9720
+
+Epoch 262/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0163 Acc: 0.9735 F1: 0.9734
+
+Epoch 263/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0164 Acc: 0.9736 F1: 0.9735
+
+Epoch 264/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0173 Acc: 0.9711 F1: 0.9711
+
+Epoch 265/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0169 Acc: 0.9721 F1: 0.9721
+
+Epoch 266/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0166 Acc: 0.9728 F1: 0.9727
+
+Epoch 267/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0171 Acc: 0.9723 F1: 0.9722
+
+Epoch 268/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0176 Acc: 0.9713 F1: 0.9713
+
+Epoch 269/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0161 Acc: 0.9744 F1: 0.9743
+
+Epoch 270/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0170 Acc: 0.9723 F1: 0.9722
+
+Epoch 271/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0173 Acc: 0.9719 F1: 0.9718
+
+Epoch 272/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0172 Acc: 0.9713 F1: 0.9713
+
+Epoch 273/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0165 Acc: 0.9725 F1: 0.9724
+
+Epoch 274/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0163 Acc: 0.9737 F1: 0.9736
+
+Epoch 275/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0175 Acc: 0.9714 F1: 0.9714
+
+Epoch 276/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0161 Acc: 0.9737 F1: 0.9736
+
+Epoch 277/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0158 Acc: 0.9747 F1: 0.9746
+
+Epoch 278/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0163 Acc: 0.9738 F1: 0.9737
+
+Epoch 279/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0172 Acc: 0.9713 F1: 0.9713
+
+Epoch 280/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0166 Acc: 0.9730 F1: 0.9730
+
+Epoch 281/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0165 Acc: 0.9734 F1: 0.9733
+
+Epoch 282/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0157 Acc: 0.9745 F1: 0.9744
+
+Epoch 283/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0160 Acc: 0.9737 F1: 0.9736
+
+Epoch 284/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0165 Acc: 0.9732 F1: 0.9731
+
+Epoch 285/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0165 Acc: 0.9731 F1: 0.9730
+
+Epoch 286/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0164 Acc: 0.9727 F1: 0.9727
+
+Epoch 287/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0156 Acc: 0.9744 F1: 0.9743
+
+Epoch 288/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0163 Acc: 0.9734 F1: 0.9734
+
+Epoch 289/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0156 Acc: 0.9750 F1: 0.9750
+
+Epoch 290/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0168 Acc: 0.9723 F1: 0.9723
+
+Epoch 291/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0172 Acc: 0.9716 F1: 0.9715
+
+Epoch 292/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0170 Acc: 0.9726 F1: 0.9725
+
+Epoch 293/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0162 Acc: 0.9736 F1: 0.9736
+
+Epoch 294/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0166 Acc: 0.9730 F1: 0.9729
+
+Epoch 295/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0156 Acc: 0.9748 F1: 0.9747
+
+Epoch 296/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0154 Acc: 0.9752 F1: 0.9752
+
+Epoch 297/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0181 Acc: 0.9707 F1: 0.9706
+
+Epoch 298/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0166 Acc: 0.9732 F1: 0.9732
+
+Epoch 299/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0199 Acc: 0.9669 F1: 0.9668
+
+Epoch 300/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0207 Acc: 0.9661 F1: 0.9659
+
+Epoch 301/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0183 Acc: 0.9704 F1: 0.9703
+
+Epoch 302/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0166 Acc: 0.9729 F1: 0.9729
+
+Epoch 303/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0162 Acc: 0.9741 F1: 0.9740
+
+Epoch 304/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0159 Acc: 0.9742 F1: 0.9741
+
+Epoch 305/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0149 Acc: 0.9758 F1: 0.9757
+
+Epoch 306/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0150 Acc: 0.9757 F1: 0.9756
+
+Epoch 307/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0147 Acc: 0.9760 F1: 0.9760
+
+Epoch 308/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0158 Acc: 0.9742 F1: 0.9741
+
+Epoch 309/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0148 Acc: 0.9756 F1: 0.9756
+
+Epoch 310/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0155 Acc: 0.9752 F1: 0.9752
+
+Epoch 311/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0151 Acc: 0.9754 F1: 0.9754
+
+Epoch 312/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0153 Acc: 0.9748 F1: 0.9747
+
+Epoch 313/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0169 Acc: 0.9725 F1: 0.9725
+
+Epoch 314/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0146 Acc: 0.9766 F1: 0.9766
+
+Epoch 315/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0154 Acc: 0.9750 F1: 0.9749
+
+Epoch 316/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0155 Acc: 0.9751 F1: 0.9750
+
+Epoch 317/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0146 Acc: 0.9762 F1: 0.9762
+
+Epoch 318/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0149 Acc: 0.9758 F1: 0.9757
+
+Epoch 319/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0142 Acc: 0.9769 F1: 0.9769
+
+Epoch 320/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0148 Acc: 0.9754 F1: 0.9754
+
+Epoch 321/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0149 Acc: 0.9758 F1: 0.9758
+
+Epoch 322/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0142 Acc: 0.9768 F1: 0.9768
+
+Epoch 323/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0142 Acc: 0.9768 F1: 0.9768
+
+Epoch 324/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0159 Acc: 0.9740 F1: 0.9740
+
+Epoch 325/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0156 Acc: 0.9745 F1: 0.9745
+
+Epoch 326/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0187 Acc: 0.9708 F1: 0.9707
+
+Epoch 327/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0326 Acc: 0.9498 F1: 0.9494
+
+Epoch 328/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0258 Acc: 0.9582 F1: 0.9577
+
+Epoch 329/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0216 Acc: 0.9647 F1: 0.9646
+
+Epoch 330/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0204 Acc: 0.9674 F1: 0.9673
+
+Epoch 331/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0187 Acc: 0.9699 F1: 0.9698
+
+Epoch 332/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0179 Acc: 0.9710 F1: 0.9710
+
+Epoch 333/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0172 Acc: 0.9727 F1: 0.9727
+
+Epoch 334/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0166 Acc: 0.9730 F1: 0.9730
+
+Epoch 335/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0165 Acc: 0.9735 F1: 0.9734
+
+Epoch 336/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0162 Acc: 0.9739 F1: 0.9738
+
+Epoch 337/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0152 Acc: 0.9756 F1: 0.9756
+
+Epoch 338/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0144 Acc: 0.9768 F1: 0.9767
+
+Epoch 339/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0152 Acc: 0.9753 F1: 0.9753
+
+Epoch 340/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0150 Acc: 0.9760 F1: 0.9760
+
+Epoch 341/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0156 Acc: 0.9746 F1: 0.9745
+
+Epoch 342/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0143 Acc: 0.9768 F1: 0.9768
+
+Epoch 343/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0152 Acc: 0.9754 F1: 0.9754
+
+Epoch 344/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0162 Acc: 0.9736 F1: 0.9735
+
+Epoch 345/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0148 Acc: 0.9762 F1: 0.9761
+
+Epoch 346/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0138 Acc: 0.9778 F1: 0.9777
+
+Epoch 347/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0157 Acc: 0.9744 F1: 0.9743
+
+Epoch 348/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0149 Acc: 0.9761 F1: 0.9761
+
+Epoch 349/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0134 Acc: 0.9784 F1: 0.9784
+
+Epoch 350/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0163 Acc: 0.9733 F1: 0.9733
+
+Epoch 351/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0153 Acc: 0.9751 F1: 0.9750
+
+Epoch 352/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0135 Acc: 0.9782 F1: 0.9782
+
+Epoch 353/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0142 Acc: 0.9771 F1: 0.9770
+
+Epoch 354/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0128 Acc: 0.9797 F1: 0.9797
+
+Epoch 355/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0136 Acc: 0.9781 F1: 0.9781
+
+Epoch 356/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0135 Acc: 0.9786 F1: 0.9785
+
+Epoch 357/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0132 Acc: 0.9790 F1: 0.9789
+
+Epoch 358/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0141 Acc: 0.9770 F1: 0.9770
+
+Epoch 359/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0137 Acc: 0.9778 F1: 0.9778
+
+Epoch 360/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0144 Acc: 0.9767 F1: 0.9766
+
+Epoch 361/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0129 Acc: 0.9793 F1: 0.9792
+
+Epoch 362/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0131 Acc: 0.9791 F1: 0.9791
+
+Epoch 363/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0129 Acc: 0.9792 F1: 0.9791
+
+Epoch 364/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0151 Acc: 0.9755 F1: 0.9754
+
+Epoch 365/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0137 Acc: 0.9778 F1: 0.9777
+
+Epoch 366/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0133 Acc: 0.9787 F1: 0.9787
+
+Epoch 367/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0138 Acc: 0.9777 F1: 0.9777
+
+Epoch 368/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0142 Acc: 0.9772 F1: 0.9771
+
+Epoch 369/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0131 Acc: 0.9791 F1: 0.9790
+
+Epoch 370/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0130 Acc: 0.9789 F1: 0.9789
+
+Epoch 371/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0129 Acc: 0.9790 F1: 0.9789
+
+Epoch 372/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0139 Acc: 0.9773 F1: 0.9773
+
+Epoch 373/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0149 Acc: 0.9757 F1: 0.9756
+
+Epoch 374/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0136 Acc: 0.9781 F1: 0.9780
+
+Epoch 375/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0129 Acc: 0.9790 F1: 0.9790
+
+Epoch 376/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0144 Acc: 0.9761 F1: 0.9760
+
+Epoch 377/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0124 Acc: 0.9800 F1: 0.9800
+
+Epoch 378/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0133 Acc: 0.9784 F1: 0.9784
+
+Epoch 379/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0131 Acc: 0.9791 F1: 0.9791
+
+Epoch 380/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0129 Acc: 0.9793 F1: 0.9792
+
+Epoch 381/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0137 Acc: 0.9774 F1: 0.9774
+
+Epoch 382/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0137 Acc: 0.9776 F1: 0.9775
+
+Epoch 383/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0133 Acc: 0.9784 F1: 0.9784
+
+Epoch 384/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0134 Acc: 0.9785 F1: 0.9785
+
+Epoch 385/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0115 Acc: 0.9813 F1: 0.9813
+
+Epoch 386/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0138 Acc: 0.9775 F1: 0.9775
+
+Epoch 387/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0118 Acc: 0.9811 F1: 0.9811
+
+Epoch 388/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0128 Acc: 0.9795 F1: 0.9794
+
+Epoch 389/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0139 Acc: 0.9774 F1: 0.9774
+
+Epoch 390/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0130 Acc: 0.9788 F1: 0.9787
+
+Epoch 391/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0130 Acc: 0.9792 F1: 0.9792
+
+Epoch 392/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0128 Acc: 0.9792 F1: 0.9791
+
+Epoch 393/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0132 Acc: 0.9788 F1: 0.9788
+
+Epoch 394/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0125 Acc: 0.9801 F1: 0.9801
+
+Epoch 395/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0135 Acc: 0.9776 F1: 0.9776
+
+Epoch 396/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0128 Acc: 0.9793 F1: 0.9793
+
+Epoch 397/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0123 Acc: 0.9802 F1: 0.9802
+
+Epoch 398/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0119 Acc: 0.9811 F1: 0.9810
+
+Epoch 399/399
+----------
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+2.2.0
+test
+train Loss: 0.0137 Acc: 0.9778 F1: 0.9778
+
+Training complete in 489m 56s
+Best val F1: 0.9813
+Saving..
+Successfully retrieved statistics for job: zhangz65-gpu02-4411630_. 
++------------------------------------------------------------------------------+
+| GPU ID: 2                                                                    |
++====================================+=========================================+
+|-----  Execution Stats  ------------+-----------------------------------------|
+| Start Time                         | Sun Mar 17 19:16:52 2024                |
+| End Time                           | Mon Mar 18 03:28:33 2024                |
+| Total Execution Time (sec)         | 29501                                   |
+| No. of Processes                   | 16                                      |
++-----  Performance Stats  ----------+-----------------------------------------+
+| Energy Consumed (Joules)           | 152055                                  |
+| Power Usage (Watts)                | Avg: 42.1397, Max: 72.807, Min: 34.382  |
+| Max GPU Memory Used (bytes)        | 4506779648                              |
+| SM Clock (MHz)                     | Avg: 1271, Max: 1380, Min: 1230         |
+| Memory Clock (MHz)                 | Avg: 877, Max: 877, Min: 877            |
+| SM Utilization (%)                 | Avg: 21, Max: 98, Min: 0                |
+| Memory Utilization (%)             | Avg: 4, Max: 21, Min: 0                 |
+| PCIe Rx Bandwidth (megabytes)      | Avg: N/A, Max: N/A, Min: N/A            |
+| PCIe Tx Bandwidth (megabytes)      | Avg: N/A, Max: N/A, Min: N/A            |
++-----  Event Stats  ----------------+-----------------------------------------+
+| Single Bit ECC Errors              | 0                                       |
+| Double Bit ECC Errors              | 0                                       |
+| PCIe Replay Warnings               | 0                                       |
+| Critical XID Errors                | 0                                       |
++-----  Slowdown Stats  -------------+-----------------------------------------+
+| Due to - Power (%)                 | 0                                       |
+|        - Thermal (%)               | 0                                       |
+|        - Reliability (%)           | Not Supported                           |
+|        - Board Limit (%)           | Not Supported                           |
+|        - Low Utilization (%)       | Not Supported                           |
+|        - Sync Boost (%)            | 0                                       |
++--  Compute Process Utilization  ---+-----------------------------------------+
+| PID                                | 1239298                                 |
+|     Avg SM Utilization (%)         | 11                                      |
+|     Avg Memory Utilization (%)     | 2                                       |
+| PID                                | 1307492                                 |
+|     Avg SM Utilization (%)         | Not Found                               |
+|     Avg Memory Utilization (%)     | Not Found                               |
+| PID                                | 1307494                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1307493                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1307491                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1307679                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1307678                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1307677                                 |
+|     Avg SM Utilization (%)         | Not Found                               |
+|     Avg Memory Utilization (%)     | Not Found                               |
+| PID                                | 1307680                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1307860                                 |
+|     Avg SM Utilization (%)         | Not Found                               |
+|     Avg Memory Utilization (%)     | Not Found                               |
+| PID                                | 1307862                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1307861                                 |
+|     Avg SM Utilization (%)         | Not Found                               |
+|     Avg Memory Utilization (%)     | Not Found                               |
+| PID                                | 1307859                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1308061                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1308062                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1308060                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
++-----  Overall Health  -------------+-----------------------------------------+
+| Overall Health                     | Healthy                                 |
++------------------------------------+-----------------------------------------+
+

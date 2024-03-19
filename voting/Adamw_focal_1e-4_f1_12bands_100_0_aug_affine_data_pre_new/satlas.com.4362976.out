@@ -1,0 +1,2263 @@
+ INiotted
+DataLoaders created successfully!
+Model(
+  (backbone): SwinBackbone(
+    (backbone): SwinTransformer(
+      (features): Sequential(
+        (0): Sequential(
+          (0): Conv2d(22, 128, kernel_size=(4, 4), stride=(4, 4))
+          (1): Permute()
+          (2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+        )
+        (1): Sequential(
+          (0): SwinTransformerBlockV2(
+            (norm1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=128, out_features=384, bias=True)
+              (proj): Linear(in_features=128, out_features=128, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=4, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.0, mode=row)
+            (norm2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=128, out_features=512, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=512, out_features=128, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (1): SwinTransformerBlockV2(
+            (norm1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=128, out_features=384, bias=True)
+              (proj): Linear(in_features=128, out_features=128, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=4, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.021739130434782608, mode=row)
+            (norm2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=128, out_features=512, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=512, out_features=128, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (2): PatchMergingV2(
+          (reduction): Linear(in_features=512, out_features=256, bias=False)
+          (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        )
+        (3): Sequential(
+          (0): SwinTransformerBlockV2(
+            (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=256, out_features=768, bias=True)
+              (proj): Linear(in_features=256, out_features=256, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=8, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.043478260869565216, mode=row)
+            (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=256, out_features=1024, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=1024, out_features=256, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (1): SwinTransformerBlockV2(
+            (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=256, out_features=768, bias=True)
+              (proj): Linear(in_features=256, out_features=256, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=8, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.06521739130434782, mode=row)
+            (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=256, out_features=1024, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=1024, out_features=256, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (4): PatchMergingV2(
+          (reduction): Linear(in_features=1024, out_features=512, bias=False)
+          (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        )
+        (5): Sequential(
+          (0): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.08695652173913043, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (1): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.10869565217391304, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (2): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.13043478260869565, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (3): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.15217391304347827, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (4): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.17391304347826086, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (5): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.1956521739130435, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (6): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.21739130434782608, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (7): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.2391304347826087, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (8): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.2608695652173913, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (9): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.2826086956521739, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (10): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.30434782608695654, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (11): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.32608695652173914, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (12): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.34782608695652173, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (13): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.3695652173913043, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (14): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.391304347826087, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (15): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.41304347826086957, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (16): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.43478260869565216, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (17): SwinTransformerBlockV2(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=16, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.45652173913043476, mode=row)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=512, out_features=2048, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=2048, out_features=512, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (6): PatchMergingV2(
+          (reduction): Linear(in_features=2048, out_features=1024, bias=False)
+          (norm): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        )
+        (7): Sequential(
+          (0): SwinTransformerBlockV2(
+            (norm1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=32, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.4782608695652174, mode=row)
+            (norm2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=1024, out_features=4096, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=4096, out_features=1024, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (1): SwinTransformerBlockV2(
+            (norm1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            (attn): ShiftedWindowAttentionV2(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (cpb_mlp): Sequential(
+                (0): Linear(in_features=2, out_features=512, bias=True)
+                (1): ReLU(inplace=True)
+                (2): Linear(in_features=512, out_features=32, bias=False)
+              )
+            )
+            (stochastic_depth): StochasticDepth(p=0.5, mode=row)
+            (norm2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            (mlp): MLP(
+              (0): Linear(in_features=1024, out_features=4096, bias=True)
+              (1): GELU(approximate='none')
+              (2): Dropout(p=0.0, inplace=False)
+              (3): Linear(in_features=4096, out_features=1024, bias=True)
+              (4): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+      )
+      (norm): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      (permute): Permute()
+      (avgpool): AdaptiveAvgPool2d(output_size=1)
+      (flatten): Flatten(start_dim=1, end_dim=-1)
+      (head): Linear(in_features=1024, out_features=1000, bias=True)
+    )
+  )
+  (fpn): FPN(
+    (fpn): FeaturePyramidNetwork(
+      (inner_blocks): ModuleList(
+        (0): Conv2dNormActivation(
+          (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (1): Conv2dNormActivation(
+          (0): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (2): Conv2dNormActivation(
+          (0): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (3): Conv2dNormActivation(
+          (0): Conv2d(1024, 128, kernel_size=(1, 1), stride=(1, 1))
+        )
+      )
+      (layer_blocks): ModuleList(
+        (0-3): 4 x Conv2dNormActivation(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+    )
+  )
+  (head): SimpleHead(
+    (layers): Sequential(
+      (0): Sequential(
+        (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (1): Conv2d(128, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+)
+Epoch 0/399
+----------
+train Loss: 0.1438 Acc: 0.8381 F1: 0.8351
+
+Epoch 1/399
+----------
+train Loss: 0.0644 Acc: 0.9023 F1: 0.8999
+
+Epoch 2/399
+----------
+train Loss: 0.0612 Acc: 0.9064 F1: 0.9045
+
+Epoch 3/399
+----------
+train Loss: 0.0572 Acc: 0.9095 F1: 0.9074
+
+Epoch 4/399
+----------
+train Loss: 0.0575 Acc: 0.9121 F1: 0.9091
+
+Epoch 5/399
+----------
+train Loss: 0.0542 Acc: 0.9150 F1: 0.9121
+
+Epoch 6/399
+----------
+train Loss: 0.0522 Acc: 0.9162 F1: 0.9137
+
+Epoch 7/399
+----------
+train Loss: 0.0503 Acc: 0.9184 F1: 0.9159
+
+Epoch 8/399
+----------
+train Loss: 0.0517 Acc: 0.9155 F1: 0.9126
+
+Epoch 9/399
+----------
+train Loss: 0.0493 Acc: 0.9194 F1: 0.9175
+
+Epoch 10/399
+----------
+train Loss: 0.0468 Acc: 0.9236 F1: 0.9215
+
+Epoch 11/399
+----------
+train Loss: 0.0485 Acc: 0.9209 F1: 0.9183
+
+Epoch 12/399
+----------
+train Loss: 0.0446 Acc: 0.9245 F1: 0.9228
+
+Epoch 13/399
+----------
+train Loss: 0.0445 Acc: 0.9258 F1: 0.9238
+
+Epoch 14/399
+----------
+train Loss: 0.0423 Acc: 0.9274 F1: 0.9259
+
+Epoch 15/399
+----------
+train Loss: 0.0419 Acc: 0.9306 F1: 0.9293
+
+Epoch 16/399
+----------
+train Loss: 0.0422 Acc: 0.9298 F1: 0.9286
+
+Epoch 17/399
+----------
+train Loss: 0.0413 Acc: 0.9306 F1: 0.9294
+
+Epoch 18/399
+----------
+train Loss: 0.0423 Acc: 0.9291 F1: 0.9277
+
+Epoch 19/399
+----------
+train Loss: 0.0417 Acc: 0.9283 F1: 0.9271
+
+Epoch 20/399
+----------
+train Loss: 0.0396 Acc: 0.9337 F1: 0.9325
+
+Epoch 21/399
+----------
+train Loss: 0.0383 Acc: 0.9351 F1: 0.9340
+
+Epoch 22/399
+----------
+train Loss: 0.0368 Acc: 0.9376 F1: 0.9370
+
+Epoch 23/399
+----------
+train Loss: 0.0374 Acc: 0.9373 F1: 0.9364
+
+Epoch 24/399
+----------
+train Loss: 0.0363 Acc: 0.9389 F1: 0.9382
+
+Epoch 25/399
+----------
+train Loss: 0.0377 Acc: 0.9365 F1: 0.9356
+
+Epoch 26/399
+----------
+train Loss: 0.0342 Acc: 0.9428 F1: 0.9422
+
+Epoch 27/399
+----------
+train Loss: 0.0336 Acc: 0.9440 F1: 0.9433
+
+Epoch 28/399
+----------
+train Loss: 0.0340 Acc: 0.9424 F1: 0.9419
+
+Epoch 29/399
+----------
+train Loss: 0.0338 Acc: 0.9439 F1: 0.9433
+
+Epoch 30/399
+----------
+train Loss: 0.0334 Acc: 0.9442 F1: 0.9437
+
+Epoch 31/399
+----------
+train Loss: 0.0322 Acc: 0.9452 F1: 0.9447
+
+Epoch 32/399
+----------
+train Loss: 0.0318 Acc: 0.9459 F1: 0.9454
+
+Epoch 33/399
+----------
+train Loss: 0.0335 Acc: 0.9435 F1: 0.9431
+
+Epoch 34/399
+----------
+train Loss: 0.0301 Acc: 0.9495 F1: 0.9492
+
+Epoch 35/399
+----------
+train Loss: 0.0309 Acc: 0.9482 F1: 0.9478
+
+Epoch 36/399
+----------
+train Loss: 0.0313 Acc: 0.9463 F1: 0.9459
+
+Epoch 37/399
+----------
+train Loss: 0.0325 Acc: 0.9459 F1: 0.9454
+
+Epoch 38/399
+----------
+train Loss: 0.0303 Acc: 0.9500 F1: 0.9498
+
+Epoch 39/399
+----------
+train Loss: 0.0300 Acc: 0.9505 F1: 0.9502
+
+Epoch 40/399
+----------
+train Loss: 0.0302 Acc: 0.9483 F1: 0.9481
+
+Epoch 41/399
+----------
+train Loss: 0.0282 Acc: 0.9536 F1: 0.9535
+
+Epoch 42/399
+----------
+train Loss: 0.0300 Acc: 0.9502 F1: 0.9498
+
+Epoch 43/399
+----------
+train Loss: 0.0333 Acc: 0.9476 F1: 0.9472
+
+Epoch 44/399
+----------
+train Loss: 0.0379 Acc: 0.9391 F1: 0.9383
+
+Epoch 45/399
+----------
+train Loss: 0.0323 Acc: 0.9474 F1: 0.9470
+
+Epoch 46/399
+----------
+train Loss: 0.0306 Acc: 0.9508 F1: 0.9504
+
+Epoch 47/399
+----------
+train Loss: 0.0286 Acc: 0.9524 F1: 0.9520
+
+Epoch 48/399
+----------
+train Loss: 0.0270 Acc: 0.9551 F1: 0.9549
+
+Epoch 49/399
+----------
+train Loss: 0.0261 Acc: 0.9572 F1: 0.9570
+
+Epoch 50/399
+----------
+train Loss: 0.0248 Acc: 0.9588 F1: 0.9587
+
+Epoch 51/399
+----------
+train Loss: 0.0252 Acc: 0.9581 F1: 0.9580
+
+Epoch 52/399
+----------
+train Loss: 0.0251 Acc: 0.9588 F1: 0.9587
+
+Epoch 53/399
+----------
+train Loss: 0.0247 Acc: 0.9583 F1: 0.9582
+
+Epoch 54/399
+----------
+train Loss: 0.0317 Acc: 0.9460 F1: 0.9456
+
+Epoch 55/399
+----------
+train Loss: 0.0251 Acc: 0.9586 F1: 0.9585
+
+Epoch 56/399
+----------
+train Loss: 0.0260 Acc: 0.9577 F1: 0.9575
+
+Epoch 57/399
+----------
+train Loss: 0.0240 Acc: 0.9609 F1: 0.9608
+
+Epoch 58/399
+----------
+train Loss: 0.0233 Acc: 0.9611 F1: 0.9610
+
+Epoch 59/399
+----------
+train Loss: 0.0232 Acc: 0.9612 F1: 0.9610
+
+Epoch 60/399
+----------
+train Loss: 0.0238 Acc: 0.9603 F1: 0.9601
+
+Epoch 61/399
+----------
+train Loss: 0.0236 Acc: 0.9611 F1: 0.9609
+
+Epoch 62/399
+----------
+train Loss: 0.0221 Acc: 0.9639 F1: 0.9638
+
+Epoch 63/399
+----------
+train Loss: 0.0229 Acc: 0.9616 F1: 0.9615
+
+Epoch 64/399
+----------
+train Loss: 0.0225 Acc: 0.9628 F1: 0.9628
+
+Epoch 65/399
+----------
+train Loss: 0.0222 Acc: 0.9633 F1: 0.9632
+
+Epoch 66/399
+----------
+train Loss: 0.0208 Acc: 0.9655 F1: 0.9654
+
+Epoch 67/399
+----------
+train Loss: 0.0212 Acc: 0.9651 F1: 0.9650
+
+Epoch 68/399
+----------
+train Loss: 0.0208 Acc: 0.9652 F1: 0.9651
+
+Epoch 69/399
+----------
+train Loss: 0.0216 Acc: 0.9645 F1: 0.9643
+
+Epoch 70/399
+----------
+train Loss: 0.0217 Acc: 0.9641 F1: 0.9640
+
+Epoch 71/399
+----------
+train Loss: 0.0230 Acc: 0.9623 F1: 0.9622
+
+Epoch 72/399
+----------
+train Loss: 0.0221 Acc: 0.9633 F1: 0.9632
+
+Epoch 73/399
+----------
+train Loss: 0.0302 Acc: 0.9509 F1: 0.9506
+
+Epoch 74/399
+----------
+train Loss: 0.0224 Acc: 0.9631 F1: 0.9629
+
+Epoch 75/399
+----------
+train Loss: 0.0223 Acc: 0.9646 F1: 0.9644
+
+Epoch 76/399
+----------
+train Loss: 0.0206 Acc: 0.9664 F1: 0.9663
+
+Epoch 77/399
+----------
+train Loss: 0.0201 Acc: 0.9670 F1: 0.9669
+
+Epoch 78/399
+----------
+train Loss: 0.0197 Acc: 0.9671 F1: 0.9670
+
+Epoch 79/399
+----------
+train Loss: 0.0191 Acc: 0.9683 F1: 0.9683
+
+Epoch 80/399
+----------
+train Loss: 0.0194 Acc: 0.9683 F1: 0.9682
+
+Epoch 81/399
+----------
+train Loss: 0.0188 Acc: 0.9694 F1: 0.9693
+
+Epoch 82/399
+----------
+train Loss: 0.0187 Acc: 0.9694 F1: 0.9694
+
+Epoch 83/399
+----------
+train Loss: 0.0219 Acc: 0.9645 F1: 0.9644
+
+Epoch 84/399
+----------
+train Loss: 0.0311 Acc: 0.9503 F1: 0.9500
+
+Epoch 85/399
+----------
+train Loss: 0.0300 Acc: 0.9523 F1: 0.9519
+
+Epoch 86/399
+----------
+train Loss: 0.0247 Acc: 0.9591 F1: 0.9589
+
+Epoch 87/399
+----------
+train Loss: 0.0212 Acc: 0.9653 F1: 0.9652
+
+Epoch 88/399
+----------
+train Loss: 0.0191 Acc: 0.9688 F1: 0.9687
+
+Epoch 89/399
+----------
+train Loss: 0.0199 Acc: 0.9679 F1: 0.9678
+
+Epoch 90/399
+----------
+train Loss: 0.0187 Acc: 0.9693 F1: 0.9692
+
+Epoch 91/399
+----------
+train Loss: 0.0183 Acc: 0.9699 F1: 0.9698
+
+Epoch 92/399
+----------
+train Loss: 0.0196 Acc: 0.9679 F1: 0.9679
+
+Epoch 93/399
+----------
+train Loss: 0.0180 Acc: 0.9706 F1: 0.9705
+
+Epoch 94/399
+----------
+train Loss: 0.0180 Acc: 0.9706 F1: 0.9706
+
+Epoch 95/399
+----------
+train Loss: 0.0179 Acc: 0.9707 F1: 0.9707
+
+Epoch 96/399
+----------
+train Loss: 0.0176 Acc: 0.9712 F1: 0.9711
+
+Epoch 97/399
+----------
+train Loss: 0.0178 Acc: 0.9711 F1: 0.9711
+
+Epoch 98/399
+----------
+train Loss: 0.0172 Acc: 0.9715 F1: 0.9715
+
+Epoch 99/399
+----------
+train Loss: 0.0167 Acc: 0.9723 F1: 0.9722
+
+Epoch 100/399
+----------
+train Loss: 0.0304 Acc: 0.9493 F1: 0.9491
+
+Epoch 101/399
+----------
+train Loss: 0.0242 Acc: 0.9604 F1: 0.9603
+
+Epoch 102/399
+----------
+train Loss: 0.0201 Acc: 0.9669 F1: 0.9668
+
+Epoch 103/399
+----------
+train Loss: 0.0188 Acc: 0.9694 F1: 0.9694
+
+Epoch 104/399
+----------
+train Loss: 0.0179 Acc: 0.9709 F1: 0.9708
+
+Epoch 105/399
+----------
+train Loss: 0.0179 Acc: 0.9713 F1: 0.9712
+
+Epoch 106/399
+----------
+train Loss: 0.0174 Acc: 0.9713 F1: 0.9712
+
+Epoch 107/399
+----------
+train Loss: 0.0162 Acc: 0.9736 F1: 0.9735
+
+Epoch 108/399
+----------
+train Loss: 0.0169 Acc: 0.9719 F1: 0.9719
+
+Epoch 109/399
+----------
+train Loss: 0.0167 Acc: 0.9725 F1: 0.9725
+
+Epoch 110/399
+----------
+train Loss: 0.0166 Acc: 0.9730 F1: 0.9730
+
+Epoch 111/399
+----------
+train Loss: 0.0158 Acc: 0.9741 F1: 0.9741
+
+Epoch 112/399
+----------
+train Loss: 0.0161 Acc: 0.9740 F1: 0.9740
+
+Epoch 113/399
+----------
+train Loss: 0.0157 Acc: 0.9739 F1: 0.9739
+
+Epoch 114/399
+----------
+train Loss: 0.0157 Acc: 0.9744 F1: 0.9744
+
+Epoch 115/399
+----------
+train Loss: 0.0149 Acc: 0.9753 F1: 0.9753
+
+Epoch 116/399
+----------
+train Loss: 0.0154 Acc: 0.9748 F1: 0.9748
+
+Epoch 117/399
+----------
+train Loss: 0.0150 Acc: 0.9756 F1: 0.9755
+
+Epoch 118/399
+----------
+train Loss: 0.0150 Acc: 0.9755 F1: 0.9755
+
+Epoch 119/399
+----------
+train Loss: 0.0180 Acc: 0.9716 F1: 0.9716
+
+Epoch 120/399
+----------
+train Loss: 0.0228 Acc: 0.9649 F1: 0.9648
+
+Epoch 121/399
+----------
+train Loss: 0.0219 Acc: 0.9653 F1: 0.9652
+
+Epoch 122/399
+----------
+train Loss: 0.0194 Acc: 0.9685 F1: 0.9684
+
+Epoch 123/399
+----------
+train Loss: 0.0190 Acc: 0.9693 F1: 0.9692
+
+Epoch 124/399
+----------
+train Loss: 0.0225 Acc: 0.9636 F1: 0.9635
+
+Epoch 125/399
+----------
+train Loss: 0.0179 Acc: 0.9710 F1: 0.9709
+
+Epoch 126/399
+----------
+train Loss: 0.0173 Acc: 0.9722 F1: 0.9721
+
+Epoch 127/399
+----------
+train Loss: 0.0156 Acc: 0.9744 F1: 0.9744
+
+Epoch 128/399
+----------
+train Loss: 0.0155 Acc: 0.9744 F1: 0.9743
+
+Epoch 129/399
+----------
+train Loss: 0.0153 Acc: 0.9747 F1: 0.9747
+
+Epoch 130/399
+----------
+train Loss: 0.0146 Acc: 0.9759 F1: 0.9759
+
+Epoch 131/399
+----------
+train Loss: 0.0144 Acc: 0.9762 F1: 0.9762
+
+Epoch 132/399
+----------
+train Loss: 0.0151 Acc: 0.9751 F1: 0.9750
+
+Epoch 133/399
+----------
+train Loss: 0.0148 Acc: 0.9755 F1: 0.9754
+
+Epoch 134/399
+----------
+train Loss: 0.0140 Acc: 0.9772 F1: 0.9772
+
+Epoch 135/399
+----------
+train Loss: 0.0138 Acc: 0.9776 F1: 0.9776
+
+Epoch 136/399
+----------
+train Loss: 0.0140 Acc: 0.9769 F1: 0.9769
+
+Epoch 137/399
+----------
+train Loss: 0.0142 Acc: 0.9767 F1: 0.9766
+
+Epoch 138/399
+----------
+train Loss: 0.0143 Acc: 0.9767 F1: 0.9767
+
+Epoch 139/399
+----------
+train Loss: 0.0137 Acc: 0.9776 F1: 0.9776
+
+Epoch 140/399
+----------
+train Loss: 0.0133 Acc: 0.9782 F1: 0.9782
+
+Epoch 141/399
+----------
+train Loss: 0.0134 Acc: 0.9781 F1: 0.9781
+
+Epoch 142/399
+----------
+train Loss: 0.0134 Acc: 0.9780 F1: 0.9780
+
+Epoch 143/399
+----------
+train Loss: 0.0132 Acc: 0.9785 F1: 0.9785
+
+Epoch 144/399
+----------
+train Loss: 0.0132 Acc: 0.9785 F1: 0.9785
+
+Epoch 145/399
+----------
+train Loss: 0.0136 Acc: 0.9774 F1: 0.9773
+
+Epoch 146/399
+----------
+train Loss: 0.0132 Acc: 0.9785 F1: 0.9785
+
+Epoch 147/399
+----------
+train Loss: 0.0135 Acc: 0.9776 F1: 0.9776
+
+Epoch 148/399
+----------
+train Loss: 0.0126 Acc: 0.9794 F1: 0.9793
+
+Epoch 149/399
+----------
+train Loss: 0.0133 Acc: 0.9783 F1: 0.9782
+
+Epoch 150/399
+----------
+train Loss: 0.0141 Acc: 0.9773 F1: 0.9773
+
+Epoch 151/399
+----------
+train Loss: 0.0135 Acc: 0.9781 F1: 0.9781
+
+Epoch 152/399
+----------
+train Loss: 0.0139 Acc: 0.9776 F1: 0.9776
+
+Epoch 153/399
+----------
+train Loss: 0.0133 Acc: 0.9783 F1: 0.9783
+
+Epoch 154/399
+----------
+train Loss: 0.0153 Acc: 0.9753 F1: 0.9753
+
+Epoch 155/399
+----------
+train Loss: 0.0141 Acc: 0.9773 F1: 0.9773
+
+Epoch 156/399
+----------
+train Loss: 0.0130 Acc: 0.9791 F1: 0.9790
+
+Epoch 157/399
+----------
+train Loss: 0.0127 Acc: 0.9791 F1: 0.9791
+
+Epoch 158/399
+----------
+train Loss: 0.0144 Acc: 0.9769 F1: 0.9768
+
+Epoch 159/399
+----------
+train Loss: 0.0180 Acc: 0.9710 F1: 0.9709
+
+Epoch 160/399
+----------
+train Loss: 0.0200 Acc: 0.9693 F1: 0.9692
+
+Epoch 161/399
+----------
+train Loss: 0.0231 Acc: 0.9661 F1: 0.9660
+
+Epoch 162/399
+----------
+train Loss: 0.0169 Acc: 0.9731 F1: 0.9730
+
+Epoch 163/399
+----------
+train Loss: 0.0137 Acc: 0.9775 F1: 0.9775
+
+Epoch 164/399
+----------
+train Loss: 0.0129 Acc: 0.9792 F1: 0.9792
+
+Epoch 165/399
+----------
+train Loss: 0.0128 Acc: 0.9793 F1: 0.9793
+
+Epoch 166/399
+----------
+train Loss: 0.0129 Acc: 0.9787 F1: 0.9787
+
+Epoch 167/399
+----------
+train Loss: 0.0122 Acc: 0.9801 F1: 0.9801
+
+Epoch 168/399
+----------
+train Loss: 0.0124 Acc: 0.9798 F1: 0.9798
+
+Epoch 169/399
+----------
+train Loss: 0.0127 Acc: 0.9792 F1: 0.9792
+
+Epoch 170/399
+----------
+train Loss: 0.0119 Acc: 0.9806 F1: 0.9806
+
+Epoch 171/399
+----------
+train Loss: 0.0153 Acc: 0.9752 F1: 0.9751
+
+Epoch 172/399
+----------
+train Loss: 0.0138 Acc: 0.9777 F1: 0.9777
+
+Epoch 173/399
+----------
+train Loss: 0.0128 Acc: 0.9791 F1: 0.9791
+
+Epoch 174/399
+----------
+train Loss: 0.0119 Acc: 0.9806 F1: 0.9806
+
+Epoch 175/399
+----------
+train Loss: 0.0122 Acc: 0.9800 F1: 0.9800
+
+Epoch 176/399
+----------
+train Loss: 0.0119 Acc: 0.9805 F1: 0.9805
+
+Epoch 177/399
+----------
+train Loss: 0.0115 Acc: 0.9812 F1: 0.9811
+
+Epoch 178/399
+----------
+train Loss: 0.0118 Acc: 0.9807 F1: 0.9807
+
+Epoch 179/399
+----------
+train Loss: 0.0120 Acc: 0.9803 F1: 0.9803
+
+Epoch 180/399
+----------
+train Loss: 0.0113 Acc: 0.9815 F1: 0.9815
+
+Epoch 181/399
+----------
+train Loss: 0.0128 Acc: 0.9795 F1: 0.9795
+
+Epoch 182/399
+----------
+train Loss: 0.0125 Acc: 0.9798 F1: 0.9798
+
+Epoch 183/399
+----------
+train Loss: 0.0121 Acc: 0.9800 F1: 0.9800
+
+Epoch 184/399
+----------
+train Loss: 0.0115 Acc: 0.9812 F1: 0.9812
+
+Epoch 185/399
+----------
+train Loss: 0.0112 Acc: 0.9819 F1: 0.9819
+
+Epoch 186/399
+----------
+train Loss: 0.0112 Acc: 0.9819 F1: 0.9819
+
+Epoch 187/399
+----------
+train Loss: 0.0193 Acc: 0.9721 F1: 0.9721
+
+Epoch 188/399
+----------
+train Loss: 0.0178 Acc: 0.9724 F1: 0.9723
+
+Epoch 189/399
+----------
+train Loss: 0.0140 Acc: 0.9777 F1: 0.9777
+
+Epoch 190/399
+----------
+train Loss: 0.0121 Acc: 0.9804 F1: 0.9804
+
+Epoch 191/399
+----------
+train Loss: 0.0120 Acc: 0.9805 F1: 0.9805
+
+Epoch 192/399
+----------
+train Loss: 0.0121 Acc: 0.9803 F1: 0.9803
+
+Epoch 193/399
+----------
+train Loss: 0.0112 Acc: 0.9818 F1: 0.9818
+
+Epoch 194/399
+----------
+train Loss: 0.0120 Acc: 0.9807 F1: 0.9806
+
+Epoch 195/399
+----------
+train Loss: 0.0111 Acc: 0.9821 F1: 0.9821
+
+Epoch 196/399
+----------
+train Loss: 0.0112 Acc: 0.9818 F1: 0.9818
+
+Epoch 197/399
+----------
+train Loss: 0.0110 Acc: 0.9822 F1: 0.9822
+
+Epoch 198/399
+----------
+train Loss: 0.0111 Acc: 0.9820 F1: 0.9819
+
+Epoch 199/399
+----------
+train Loss: 0.0107 Acc: 0.9825 F1: 0.9825
+
+Epoch 200/399
+----------
+train Loss: 0.0108 Acc: 0.9824 F1: 0.9824
+
+Epoch 201/399
+----------
+train Loss: 0.0105 Acc: 0.9830 F1: 0.9830
+
+Epoch 202/399
+----------
+train Loss: 0.0105 Acc: 0.9829 F1: 0.9829
+
+Epoch 203/399
+----------
+train Loss: 0.0108 Acc: 0.9823 F1: 0.9823
+
+Epoch 204/399
+----------
+train Loss: 0.0102 Acc: 0.9835 F1: 0.9835
+
+Epoch 205/399
+----------
+train Loss: 0.0101 Acc: 0.9835 F1: 0.9835
+
+Epoch 206/399
+----------
+train Loss: 0.0103 Acc: 0.9832 F1: 0.9831
+
+Epoch 207/399
+----------
+train Loss: 0.0099 Acc: 0.9840 F1: 0.9840
+
+Epoch 208/399
+----------
+train Loss: 0.0106 Acc: 0.9828 F1: 0.9828
+
+Epoch 209/399
+----------
+train Loss: 0.0103 Acc: 0.9832 F1: 0.9832
+
+Epoch 210/399
+----------
+train Loss: 0.0111 Acc: 0.9818 F1: 0.9818
+
+Epoch 211/399
+----------
+train Loss: 0.0102 Acc: 0.9835 F1: 0.9835
+
+Epoch 212/399
+----------
+train Loss: 0.0108 Acc: 0.9827 F1: 0.9827
+
+Epoch 213/399
+----------
+train Loss: 0.0106 Acc: 0.9828 F1: 0.9828
+
+Epoch 214/399
+----------
+train Loss: 0.0102 Acc: 0.9835 F1: 0.9835
+
+Epoch 215/399
+----------
+train Loss: 0.0103 Acc: 0.9833 F1: 0.9833
+
+Epoch 216/399
+----------
+train Loss: 0.0098 Acc: 0.9841 F1: 0.9841
+
+Epoch 217/399
+----------
+train Loss: 0.0099 Acc: 0.9838 F1: 0.9838
+
+Epoch 218/399
+----------
+train Loss: 0.0096 Acc: 0.9844 F1: 0.9844
+
+Epoch 219/399
+----------
+train Loss: 0.0097 Acc: 0.9843 F1: 0.9843
+
+Epoch 220/399
+----------
+train Loss: 0.0101 Acc: 0.9838 F1: 0.9837
+
+Epoch 221/399
+----------
+train Loss: 0.0103 Acc: 0.9831 F1: 0.9831
+
+Epoch 222/399
+----------
+train Loss: 0.0100 Acc: 0.9837 F1: 0.9837
+
+Epoch 223/399
+----------
+train Loss: 0.0103 Acc: 0.9834 F1: 0.9833
+
+Epoch 224/399
+----------
+train Loss: 0.0108 Acc: 0.9824 F1: 0.9824
+
+Epoch 225/399
+----------
+train Loss: 0.0100 Acc: 0.9839 F1: 0.9839
+
+Epoch 226/399
+----------
+train Loss: 0.0097 Acc: 0.9843 F1: 0.9843
+
+Epoch 227/399
+----------
+train Loss: 0.0097 Acc: 0.9844 F1: 0.9843
+
+Epoch 228/399
+----------
+train Loss: 0.0099 Acc: 0.9839 F1: 0.9839
+
+Epoch 229/399
+----------
+train Loss: 0.0094 Acc: 0.9850 F1: 0.9850
+
+Epoch 230/399
+----------
+train Loss: 0.0097 Acc: 0.9843 F1: 0.9842
+
+Epoch 231/399
+----------
+train Loss: 0.0090 Acc: 0.9854 F1: 0.9854
+
+Epoch 232/399
+----------
+train Loss: 0.0096 Acc: 0.9844 F1: 0.9844
+
+Epoch 233/399
+----------
+train Loss: 0.0096 Acc: 0.9844 F1: 0.9844
+
+Epoch 234/399
+----------
+train Loss: 0.0090 Acc: 0.9853 F1: 0.9853
+
+Epoch 235/399
+----------
+train Loss: 0.0092 Acc: 0.9850 F1: 0.9850
+
+Epoch 236/399
+----------
+train Loss: 0.0091 Acc: 0.9855 F1: 0.9855
+
+Epoch 237/399
+----------
+train Loss: 0.0088 Acc: 0.9858 F1: 0.9858
+
+Epoch 238/399
+----------
+train Loss: 0.0092 Acc: 0.9850 F1: 0.9850
+
+Epoch 239/399
+----------
+train Loss: 0.0091 Acc: 0.9851 F1: 0.9851
+
+Epoch 240/399
+----------
+train Loss: 0.0094 Acc: 0.9848 F1: 0.9848
+
+Epoch 241/399
+----------
+train Loss: 0.0097 Acc: 0.9844 F1: 0.9844
+
+Epoch 242/399
+----------
+train Loss: 0.0105 Acc: 0.9832 F1: 0.9831
+
+Epoch 243/399
+----------
+train Loss: 0.0095 Acc: 0.9846 F1: 0.9846
+
+Epoch 244/399
+----------
+train Loss: 0.0095 Acc: 0.9849 F1: 0.9849
+
+Epoch 245/399
+----------
+train Loss: 0.0095 Acc: 0.9848 F1: 0.9848
+
+Epoch 246/399
+----------
+train Loss: 0.0093 Acc: 0.9850 F1: 0.9850
+
+Epoch 247/399
+----------
+train Loss: 0.0099 Acc: 0.9845 F1: 0.9845
+
+Epoch 248/399
+----------
+train Loss: 0.0089 Acc: 0.9858 F1: 0.9858
+
+Epoch 249/399
+----------
+train Loss: 0.0089 Acc: 0.9857 F1: 0.9857
+
+Epoch 250/399
+----------
+train Loss: 0.0087 Acc: 0.9859 F1: 0.9859
+
+Epoch 251/399
+----------
+train Loss: 0.0090 Acc: 0.9855 F1: 0.9855
+
+Epoch 252/399
+----------
+train Loss: 0.0093 Acc: 0.9850 F1: 0.9849
+
+Epoch 253/399
+----------
+train Loss: 0.0088 Acc: 0.9859 F1: 0.9859
+
+Epoch 254/399
+----------
+train Loss: 0.0088 Acc: 0.9859 F1: 0.9859
+
+Epoch 255/399
+----------
+train Loss: 0.0088 Acc: 0.9860 F1: 0.9860
+
+Epoch 256/399
+----------
+train Loss: 0.0097 Acc: 0.9846 F1: 0.9845
+
+Epoch 257/399
+----------
+train Loss: 0.0086 Acc: 0.9861 F1: 0.9861
+
+Epoch 258/399
+----------
+train Loss: 0.0085 Acc: 0.9863 F1: 0.9863
+
+Epoch 259/399
+----------
+train Loss: 0.0092 Acc: 0.9852 F1: 0.9852
+
+Epoch 260/399
+----------
+train Loss: 0.0090 Acc: 0.9856 F1: 0.9856
+
+Epoch 261/399
+----------
+train Loss: 0.0089 Acc: 0.9856 F1: 0.9855
+
+Epoch 262/399
+----------
+train Loss: 0.0084 Acc: 0.9865 F1: 0.9865
+
+Epoch 263/399
+----------
+train Loss: 0.0082 Acc: 0.9869 F1: 0.9869
+
+Epoch 264/399
+----------
+train Loss: 0.0083 Acc: 0.9867 F1: 0.9867
+
+Epoch 265/399
+----------
+train Loss: 0.0081 Acc: 0.9870 F1: 0.9870
+
+Epoch 266/399
+----------
+train Loss: 0.0086 Acc: 0.9861 F1: 0.9861
+
+Epoch 267/399
+----------
+train Loss: 0.0084 Acc: 0.9865 F1: 0.9865
+
+Epoch 268/399
+----------
+train Loss: 0.0087 Acc: 0.9860 F1: 0.9860
+
+Epoch 269/399
+----------
+train Loss: 0.0084 Acc: 0.9863 F1: 0.9863
+
+Epoch 270/399
+----------
+train Loss: 0.0082 Acc: 0.9869 F1: 0.9869
+
+Epoch 271/399
+----------
+train Loss: 0.0086 Acc: 0.9862 F1: 0.9862
+
+Epoch 272/399
+----------
+train Loss: 0.0133 Acc: 0.9840 F1: 0.9840
+
+Epoch 273/399
+----------
+train Loss: 0.0122 Acc: 0.9810 F1: 0.9810
+
+Epoch 274/399
+----------
+train Loss: 0.0095 Acc: 0.9847 F1: 0.9847
+
+Epoch 275/399
+----------
+train Loss: 0.0089 Acc: 0.9855 F1: 0.9855
+
+Epoch 276/399
+----------
+train Loss: 0.0086 Acc: 0.9864 F1: 0.9864
+
+Epoch 277/399
+----------
+train Loss: 0.0085 Acc: 0.9862 F1: 0.9862
+
+Epoch 278/399
+----------
+train Loss: 0.0085 Acc: 0.9862 F1: 0.9862
+
+Epoch 279/399
+----------
+train Loss: 0.0085 Acc: 0.9861 F1: 0.9861
+
+Epoch 280/399
+----------
+train Loss: 0.0166 Acc: 0.9768 F1: 0.9768
+
+Epoch 281/399
+----------
+train Loss: 0.0126 Acc: 0.9800 F1: 0.9799
+
+Epoch 282/399
+----------
+train Loss: 0.0104 Acc: 0.9837 F1: 0.9837
+
+Epoch 283/399
+----------
+train Loss: 0.0094 Acc: 0.9848 F1: 0.9848
+
+Epoch 284/399
+----------
+train Loss: 0.0084 Acc: 0.9866 F1: 0.9866
+
+Epoch 285/399
+----------
+train Loss: 0.0083 Acc: 0.9866 F1: 0.9866
+
+Epoch 286/399
+----------
+train Loss: 0.0084 Acc: 0.9864 F1: 0.9864
+
+Epoch 287/399
+----------
+train Loss: 0.0083 Acc: 0.9866 F1: 0.9866
+
+Epoch 288/399
+----------
+train Loss: 0.0079 Acc: 0.9873 F1: 0.9872
+
+Epoch 289/399
+----------
+train Loss: 0.0078 Acc: 0.9874 F1: 0.9874
+
+Epoch 290/399
+----------
+train Loss: 0.0080 Acc: 0.9870 F1: 0.9870
+
+Epoch 291/399
+----------
+train Loss: 0.0080 Acc: 0.9871 F1: 0.9871
+
+Epoch 292/399
+----------
+train Loss: 0.0079 Acc: 0.9873 F1: 0.9873
+
+Epoch 293/399
+----------
+train Loss: 0.0074 Acc: 0.9882 F1: 0.9882
+
+Epoch 294/399
+----------
+train Loss: 0.0072 Acc: 0.9883 F1: 0.9883
+
+Epoch 295/399
+----------
+train Loss: 0.0078 Acc: 0.9875 F1: 0.9875
+
+Epoch 296/399
+----------
+train Loss: 0.0075 Acc: 0.9878 F1: 0.9878
+
+Epoch 297/399
+----------
+train Loss: 0.0074 Acc: 0.9880 F1: 0.9880
+
+Epoch 298/399
+----------
+train Loss: 0.0076 Acc: 0.9878 F1: 0.9878
+
+Epoch 299/399
+----------
+train Loss: 0.0071 Acc: 0.9885 F1: 0.9885
+
+Epoch 300/399
+----------
+train Loss: 0.0074 Acc: 0.9879 F1: 0.9879
+
+Epoch 301/399
+----------
+train Loss: 0.0076 Acc: 0.9877 F1: 0.9877
+
+Epoch 302/399
+----------
+train Loss: 0.0075 Acc: 0.9879 F1: 0.9879
+
+Epoch 303/399
+----------
+train Loss: 0.0078 Acc: 0.9875 F1: 0.9875
+
+Epoch 304/399
+----------
+train Loss: 0.0074 Acc: 0.9882 F1: 0.9882
+
+Epoch 305/399
+----------
+train Loss: 0.0076 Acc: 0.9876 F1: 0.9876
+
+Epoch 306/399
+----------
+train Loss: 0.0071 Acc: 0.9885 F1: 0.9885
+
+Epoch 307/399
+----------
+train Loss: 0.0071 Acc: 0.9886 F1: 0.9886
+
+Epoch 308/399
+----------
+train Loss: 0.0071 Acc: 0.9886 F1: 0.9886
+
+Epoch 309/399
+----------
+train Loss: 0.0073 Acc: 0.9882 F1: 0.9882
+
+Epoch 310/399
+----------
+train Loss: 0.0070 Acc: 0.9888 F1: 0.9888
+
+Epoch 311/399
+----------
+train Loss: 0.0074 Acc: 0.9880 F1: 0.9880
+
+Epoch 312/399
+----------
+train Loss: 0.0071 Acc: 0.9885 F1: 0.9885
+
+Epoch 313/399
+----------
+train Loss: 0.0070 Acc: 0.9887 F1: 0.9887
+
+Epoch 314/399
+----------
+train Loss: 0.0077 Acc: 0.9875 F1: 0.9875
+
+Epoch 315/399
+----------
+train Loss: 0.0073 Acc: 0.9883 F1: 0.9883
+
+Epoch 316/399
+----------
+train Loss: 0.0072 Acc: 0.9883 F1: 0.9883
+
+Epoch 317/399
+----------
+train Loss: 0.0071 Acc: 0.9885 F1: 0.9885
+
+Epoch 318/399
+----------
+train Loss: 0.0073 Acc: 0.9882 F1: 0.9882
+
+Epoch 319/399
+----------
+train Loss: 0.0071 Acc: 0.9887 F1: 0.9887
+
+Epoch 320/399
+----------
+train Loss: 0.0075 Acc: 0.9879 F1: 0.9879
+
+Epoch 321/399
+----------
+train Loss: 0.0071 Acc: 0.9886 F1: 0.9886
+
+Epoch 322/399
+----------
+train Loss: 0.0071 Acc: 0.9885 F1: 0.9885
+
+Epoch 323/399
+----------
+train Loss: 0.0069 Acc: 0.9888 F1: 0.9888
+
+Epoch 324/399
+----------
+train Loss: 0.0068 Acc: 0.9889 F1: 0.9889
+
+Epoch 325/399
+----------
+train Loss: 0.0070 Acc: 0.9888 F1: 0.9888
+
+Epoch 326/399
+----------
+train Loss: 0.0076 Acc: 0.9877 F1: 0.9877
+
+Epoch 327/399
+----------
+train Loss: 0.0071 Acc: 0.9886 F1: 0.9886
+
+Epoch 328/399
+----------
+train Loss: 0.0070 Acc: 0.9888 F1: 0.9888
+
+Epoch 329/399
+----------
+train Loss: 0.0096 Acc: 0.9856 F1: 0.9856
+
+Epoch 330/399
+----------
+train Loss: 0.0255 Acc: 0.9627 F1: 0.9626
+
+Epoch 331/399
+----------
+train Loss: 0.0136 Acc: 0.9797 F1: 0.9796
+
+Epoch 332/399
+----------
+train Loss: 0.0142 Acc: 0.9785 F1: 0.9785
+
+Epoch 333/399
+----------
+train Loss: 0.0094 Acc: 0.9854 F1: 0.9854
+
+Epoch 334/399
+----------
+train Loss: 0.0081 Acc: 0.9872 F1: 0.9872
+
+Epoch 335/399
+----------
+train Loss: 0.0083 Acc: 0.9869 F1: 0.9869
+
+Epoch 336/399
+----------
+train Loss: 0.0080 Acc: 0.9871 F1: 0.9871
+
+Epoch 337/399
+----------
+train Loss: 0.0076 Acc: 0.9880 F1: 0.9880
+
+Epoch 338/399
+----------
+train Loss: 0.0084 Acc: 0.9869 F1: 0.9869
+
+Epoch 339/399
+----------
+train Loss: 0.0075 Acc: 0.9880 F1: 0.9880
+
+Epoch 340/399
+----------
+train Loss: 0.0071 Acc: 0.9887 F1: 0.9887
+
+Epoch 341/399
+----------
+train Loss: 0.0069 Acc: 0.9890 F1: 0.9890
+
+Epoch 342/399
+----------
+train Loss: 0.0069 Acc: 0.9890 F1: 0.9890
+
+Epoch 343/399
+----------
+train Loss: 0.0070 Acc: 0.9887 F1: 0.9887
+
+Epoch 344/399
+----------
+train Loss: 0.0066 Acc: 0.9894 F1: 0.9894
+
+Epoch 345/399
+----------
+train Loss: 0.0067 Acc: 0.9894 F1: 0.9894
+
+Epoch 346/399
+----------
+train Loss: 0.0068 Acc: 0.9891 F1: 0.9891
+
+Epoch 347/399
+----------
+train Loss: 0.0066 Acc: 0.9895 F1: 0.9895
+
+Epoch 348/399
+----------
+train Loss: 0.0070 Acc: 0.9887 F1: 0.9887
+
+Epoch 349/399
+----------
+train Loss: 0.0068 Acc: 0.9889 F1: 0.9889
+
+Epoch 350/399
+----------
+train Loss: 0.0068 Acc: 0.9890 F1: 0.9890
+
+Epoch 351/399
+----------
+train Loss: 0.0066 Acc: 0.9894 F1: 0.9894
+
+Epoch 352/399
+----------
+train Loss: 0.0068 Acc: 0.9890 F1: 0.9890
+
+Epoch 353/399
+----------
+train Loss: 0.0069 Acc: 0.9888 F1: 0.9888
+
+Epoch 354/399
+----------
+train Loss: 0.0064 Acc: 0.9897 F1: 0.9897
+
+Epoch 355/399
+----------
+train Loss: 0.0067 Acc: 0.9892 F1: 0.9892
+
+Epoch 356/399
+----------
+train Loss: 0.0161 Acc: 0.9790 F1: 0.9790
+
+Epoch 357/399
+----------
+train Loss: 0.0084 Acc: 0.9870 F1: 0.9870
+
+Epoch 358/399
+----------
+train Loss: 0.0080 Acc: 0.9874 F1: 0.9874
+
+Epoch 359/399
+----------
+train Loss: 0.0076 Acc: 0.9878 F1: 0.9878
+
+Epoch 360/399
+----------
+train Loss: 0.0074 Acc: 0.9883 F1: 0.9883
+
+Epoch 361/399
+----------
+train Loss: 0.0068 Acc: 0.9892 F1: 0.9892
+
+Epoch 362/399
+----------
+train Loss: 0.0067 Acc: 0.9893 F1: 0.9893
+
+Epoch 363/399
+----------
+train Loss: 0.0065 Acc: 0.9896 F1: 0.9896
+
+Epoch 364/399
+----------
+train Loss: 0.0064 Acc: 0.9898 F1: 0.9898
+
+Epoch 365/399
+----------
+train Loss: 0.0069 Acc: 0.9890 F1: 0.9890
+
+Epoch 366/399
+----------
+train Loss: 0.0063 Acc: 0.9899 F1: 0.9899
+
+Epoch 367/399
+----------
+train Loss: 0.0065 Acc: 0.9897 F1: 0.9897
+
+Epoch 368/399
+----------
+train Loss: 0.0064 Acc: 0.9898 F1: 0.9898
+
+Epoch 369/399
+----------
+train Loss: 0.0068 Acc: 0.9891 F1: 0.9891
+
+Epoch 370/399
+----------
+train Loss: 0.0065 Acc: 0.9896 F1: 0.9896
+
+Epoch 371/399
+----------
+train Loss: 0.0067 Acc: 0.9893 F1: 0.9893
+
+Epoch 372/399
+----------
+train Loss: 0.0067 Acc: 0.9891 F1: 0.9891
+
+Epoch 373/399
+----------
+train Loss: 0.0062 Acc: 0.9899 F1: 0.9899
+
+Epoch 374/399
+----------
+train Loss: 0.0064 Acc: 0.9897 F1: 0.9897
+
+Epoch 375/399
+----------
+train Loss: 0.0061 Acc: 0.9902 F1: 0.9902
+
+Epoch 376/399
+----------
+train Loss: 0.0063 Acc: 0.9898 F1: 0.9898
+
+Epoch 377/399
+----------
+train Loss: 0.0060 Acc: 0.9903 F1: 0.9903
+
+Epoch 378/399
+----------
+train Loss: 0.0065 Acc: 0.9895 F1: 0.9895
+
+Epoch 379/399
+----------
+train Loss: 0.0062 Acc: 0.9900 F1: 0.9900
+
+Epoch 380/399
+----------
+train Loss: 0.0064 Acc: 0.9896 F1: 0.9896
+
+Epoch 381/399
+----------
+train Loss: 0.0062 Acc: 0.9900 F1: 0.9900
+
+Epoch 382/399
+----------
+train Loss: 0.0063 Acc: 0.9899 F1: 0.9899
+
+Epoch 383/399
+----------
+train Loss: 0.0062 Acc: 0.9901 F1: 0.9901
+
+Epoch 384/399
+----------
+train Loss: 0.0062 Acc: 0.9901 F1: 0.9901
+
+Epoch 385/399
+----------
+train Loss: 0.0065 Acc: 0.9895 F1: 0.9895
+
+Epoch 386/399
+----------
+train Loss: 0.0067 Acc: 0.9891 F1: 0.9891
+
+Epoch 387/399
+----------
+train Loss: 0.0064 Acc: 0.9898 F1: 0.9898
+
+Epoch 388/399
+----------
+train Loss: 0.0057 Acc: 0.9908 F1: 0.9908
+
+Epoch 389/399
+----------
+train Loss: 0.0061 Acc: 0.9904 F1: 0.9904
+
+Epoch 390/399
+----------
+train Loss: 0.0065 Acc: 0.9896 F1: 0.9896
+
+Epoch 391/399
+----------
+train Loss: 0.0064 Acc: 0.9897 F1: 0.9897
+
+Epoch 392/399
+----------
+train Loss: 0.0062 Acc: 0.9902 F1: 0.9902
+
+Epoch 393/399
+----------
+train Loss: 0.0062 Acc: 0.9900 F1: 0.9900
+
+Epoch 394/399
+----------
+train Loss: 0.0061 Acc: 0.9903 F1: 0.9903
+
+Epoch 395/399
+----------
+train Loss: 0.0062 Acc: 0.9901 F1: 0.9901
+
+Epoch 396/399
+----------
+train Loss: 0.0064 Acc: 0.9898 F1: 0.9898
+
+Epoch 397/399
+----------
+train Loss: 0.0061 Acc: 0.9902 F1: 0.9902
+
+Epoch 398/399
+----------
+train Loss: 0.0059 Acc: 0.9907 F1: 0.9907
+
+Epoch 399/399
+----------
+train Loss: 0.0064 Acc: 0.9899 F1: 0.9899
+
+Training complete in 242m 1s
+Best train F1: 0.9908
+Saving..
+Successfully retrieved statistics for job: zhangz65-gpu07-4362976_. 
++------------------------------------------------------------------------------+
+| GPU ID: 2                                                                    |
++====================================+=========================================+
+|-----  Execution Stats  ------------+-----------------------------------------|
+| Start Time                         | Sat Mar 16 15:37:10 2024                |
+| End Time                           | Sat Mar 16 19:41:57 2024                |
+| Total Execution Time (sec)         | 14687.6                                 |
+| No. of Processes                   | 16                                      |
++-----  Performance Stats  ----------+-----------------------------------------+
+| Energy Consumed (Joules)           | 586163                                  |
+| Power Usage (Watts)                | Avg: 163.109, Max: 260.282, Min: 39.599 |
+| Max GPU Memory Used (bytes)        | 9036627968                              |
+| SM Clock (MHz)                     | Avg: 1360, Max: 1380, Min: 1230         |
+| Memory Clock (MHz)                 | Avg: 877, Max: 877, Min: 877            |
+| SM Utilization (%)                 | Avg: 71, Max: 100, Min: 0               |
+| Memory Utilization (%)             | Avg: 35, Max: 57, Min: 0                |
+| PCIe Rx Bandwidth (megabytes)      | Avg: N/A, Max: N/A, Min: N/A            |
+| PCIe Tx Bandwidth (megabytes)      | Avg: N/A, Max: N/A, Min: N/A            |
++-----  Event Stats  ----------------+-----------------------------------------+
+| Single Bit ECC Errors              | 0                                       |
+| Double Bit ECC Errors              | 0                                       |
+| PCIe Replay Warnings               | 0                                       |
+| Critical XID Errors                | 0                                       |
++-----  Slowdown Stats  -------------+-----------------------------------------+
+| Due to - Power (%)                 | 0                                       |
+|        - Thermal (%)               | 0                                       |
+|        - Reliability (%)           | Not Supported                           |
+|        - Board Limit (%)           | Not Supported                           |
+|        - Low Utilization (%)       | Not Supported                           |
+|        - Sync Boost (%)            | 0                                       |
++--  Compute Process Utilization  ---+-----------------------------------------+
+| PID                                | 1313735                                 |
+|     Avg SM Utilization (%)         | 14                                      |
+|     Avg Memory Utilization (%)     | 7                                       |
+| PID                                | 1367891                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1367890                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1367892                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1367889                                 |
+|     Avg SM Utilization (%)         | Not Found                               |
+|     Avg Memory Utilization (%)     | Not Found                               |
+| PID                                | 1368090                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1368091                                 |
+|     Avg SM Utilization (%)         | Not Found                               |
+|     Avg Memory Utilization (%)     | Not Found                               |
+| PID                                | 1368089                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1368092                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1368275                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1368274                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1368277                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1368276                                 |
+|     Avg SM Utilization (%)         | 0                                       |
+|     Avg Memory Utilization (%)     | 0                                       |
+| PID                                | 1368470                                 |
+|     Avg SM Utilization (%)         | Not Found                               |
+|     Avg Memory Utilization (%)     | Not Found                               |
+| PID                                | 1368469                                 |
+|     Avg SM Utilization (%)         | Not Found                               |
+|     Avg Memory Utilization (%)     | Not Found                               |
+| PID                                | 1368472                                 |
+|     Avg SM Utilization (%)         | Not Found                               |
+|     Avg Memory Utilization (%)     | Not Found                               |
++-----  Overall Health  -------------+-----------------------------------------+
+| Overall Health                     | Healthy                                 |
++------------------------------------+-----------------------------------------+
+
